@@ -1,0 +1,93 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using UnityEngine;
+using static UnityEditor.Progress;
+using static UnityEngine.UI.Image;
+
+public class SimpleList<T> : ISimpleList<T>
+{
+    T[] genericArray;
+    const int defaultSize = 5;
+    private int count = 0;
+    public T this[int index] 
+    { 
+        get 
+        { 
+            return genericArray[index]; 
+        } 
+        set 
+        {
+            genericArray[index] = value;
+        } 
+    }
+
+    public int Count 
+    {  
+        get 
+        { 
+            return count; 
+        } 
+    }
+
+    public SimpleList() 
+    {
+        genericArray = new T[defaultSize];
+    }
+
+    public SimpleList(int arraySize)
+    {
+        genericArray = new T[arraySize];
+    }
+
+    public void Add(T item)
+    {
+        if (count >= genericArray.Length)
+        {
+            // Creamos un nuevo array con el doble de tamaño
+            T[] newArray = new T[genericArray.Length * 2];
+            // Copiamos los elementos existentes al nuevo array
+            for (int i = 0; i < genericArray.Length; i++)
+            {
+                newArray[i] = genericArray[i];
+            }
+            // Reemplazamos el array original
+            genericArray = newArray;
+        }
+        // Agregamos el nuevo elemento
+        genericArray[count] = item;
+        count++;
+    }
+
+
+    public void AddRange(T[] collection)
+    {
+        for (int i = 0; i < collection.Length; i++)
+        {
+            Add(collection[i]);
+        }
+    }
+
+    public void Clear()
+    {
+        for (int i = 0; i < genericArray.Length; i++)
+        {
+            Remove(genericArray[i]);
+            count--;
+        }
+    }
+
+    public bool Remove(T item)
+    {
+        for (int i = 0; i < genericArray.Length; i++)
+        {
+            if (genericArray[i].Equals(item))
+            {
+                count--;
+                Remove(genericArray[i]);
+                return true;
+            }       
+        }
+        return false;
+    }
+}
