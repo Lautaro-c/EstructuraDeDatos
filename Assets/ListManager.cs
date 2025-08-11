@@ -1,24 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ListManager : MonoBehaviour
 {
     private List<int> list;
+    private int secondsToDeactivate = 2;
     [SerializeField] private TextMeshProUGUI countText;
-    [SerializeField] private TMP_InputField inputField;
-    
-    private int numeroEntero;
+    [SerializeField] private TextMeshProUGUI lastNumText;
+    [SerializeField] private TextMeshProUGUI actualValueText;
+    [SerializeField] private TMP_InputField addInputField;
+    [SerializeField] private TMP_InputField removeInputField;
+    [SerializeField] private TMP_InputField numIDInputField;
+    [SerializeField] private TMP_InputField newNumInputField;
+    [SerializeField] private GameObject tickSign;
+    [SerializeField] private GameObject crossSing;
 
-    public void LeerNumero()
+    private void Start()
     {
-        if (int.TryParse(inputField.text, out int resultado))
+        list = new List<int>();
+    }
+
+    private void Update()
+    {
+        countText.text = "Count: " + list.Count.ToString();
+        UpdateLastNumText();
+    }
+
+    public void AddNumber()
+    {
+        if (int.TryParse(addInputField.text, out int result))
         {
-            numeroEntero = resultado;
-            AddNumber(resultado);
-            Debug.Log("Número ingresado: " + numeroEntero);
+            list.Add(result);
+            Debug.Log("Número ingresado: " + result);
         }
         else
         {
@@ -26,21 +43,15 @@ public class ListManager : MonoBehaviour
         }
     }
 
-
-    private void Start()
+    public void UpdateLastNumText()
     {
-        list = new List<int>(); 
-    }
-
-    private void Update()
-    {
-        countText.text = "Count: " + list.Count.ToString();
-    }
-
-    public void AddNumber(int number)
-    { 
-        Debug.Log(number.ToString());
-        list.Add(number); 
+        if (list.Count > 0)
+        {
+            lastNumText.text = "Last number added: " + list[list.Count - 1].ToString();
+        }else
+        {
+            lastNumText.text = "Last number added: ";
+        }
     }
 
     public void ClearNumbers()
@@ -48,9 +59,57 @@ public class ListManager : MonoBehaviour
         list.Clear(); 
     }
 
-    public void RemoveNumber(int number)
+    public void RemoveNumber()
     {
-        list.Remove(number);
+        if (int.TryParse(removeInputField.text, out int result))
+        {
+            if (list.Remove(result))
+            {
+                Debug.Log("Número borrado: " + result);
+                tickSign.SetActive(true);
+            }else
+            { 
+                crossSing.SetActive(true); 
+            }
+            Invoke("DeactivateSigns", secondsToDeactivate);
+        }
+        else
+        {
+            Debug.LogWarning("No se ingresó un número válido.");
+        }
+    }
+
+    public void ShowNumValue()
+    {
+        if (int.TryParse(numIDInputField.text, out int result))
+        {
+            actualValueText.text = "Actual value: " + list[result].ToString();
+        }
+        else
+        {
+            Debug.LogWarning("No se ingresó un número válido.");
+        }
+    }
+
+    public void ChangeValue()
+    {
+        if (int.TryParse(numIDInputField.text, out int result) && int.TryParse(newNumInputField.text, out int result2))
+        {
+            if (list.Count - 1 >= result)
+            {
+                list[result] = result2;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No se ingresó un número válido.");
+        }
+    }
+
+    public void DeactivateSigns()
+    { 
+        tickSign.SetActive(false);
+        crossSing.SetActive(false); 
     }
 
     public void AddRangeNumbers(int[] numbers)
