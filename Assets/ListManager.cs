@@ -16,6 +16,7 @@ public class ListManager : MonoBehaviour
     [SerializeField] private TMP_InputField removeInputField;
     [SerializeField] private TMP_InputField numIDInputField;
     [SerializeField] private TMP_InputField newNumInputField;
+    [SerializeField] private TMP_InputField numRangeInputField;
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
@@ -36,11 +37,27 @@ public class ListManager : MonoBehaviour
         {
             list.Add(result);
             Debug.Log("Número ingresado: " + result);
+            
         }
         else
         {
             Debug.LogWarning("No se ingresó un número válido.");
         }
+    }
+
+    public void AddNumbersRange()
+    {
+        string input = numRangeInputField.text;
+        string[] parts = input.Split(',');
+        int[] partsNumbers = new int[parts.Length]; 
+        for (int i = 0; i < parts.Length; i++)
+        {
+            if (int.TryParse(parts[i], out int number))
+            {
+                partsNumbers[i] = number;
+            }
+        }
+        list.AddRange(partsNumbers);
     }
 
     public void UpdateLastNumText()
@@ -110,10 +127,5 @@ public class ListManager : MonoBehaviour
     { 
         tickSign.SetActive(false);
         crossSing.SetActive(false); 
-    }
-
-    public void AddRangeNumbers(int[] numbers)
-    {
-        list.AddRange(numbers);
     }
 }

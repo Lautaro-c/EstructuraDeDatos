@@ -44,17 +44,13 @@ public class SimpleList<T> : ISimpleList<T>
     {
         if (count >= genericArray.Length)
         {
-            // Creamos un nuevo array con el doble de tamaño
             T[] newArray = new T[genericArray.Length * 2];
-            // Copiamos los elementos existentes al nuevo array
             for (int i = 0; i < genericArray.Length; i++)
             {
                 newArray[i] = genericArray[i];
             }
-            // Reemplazamos el array original
             genericArray = newArray;
         }
-        // Agregamos el nuevo elemento
         genericArray[count] = item;
         count++;
     }
