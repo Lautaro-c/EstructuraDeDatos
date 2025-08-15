@@ -16,17 +16,23 @@ public class MyLinkedList<T>
         get
         {
             //Verifica que el índice esté dentro del rango válido
-            if (index < 0 || index >= Count) throw new IndexOutOfRangeException();
+            if (index < 0 || index >= Count)
+            {
+                return default(T);
+            }
             //Recorre la lista desde el principio hasta el índice deseado y devuelve el dato.
-            var current = root;
-            for (int i = 0; i < index; i++) current = current.Next;
+            MyNode<T> current = root;
+            for (int i = 0; i < index; i++)
+            {
+                current = current.Next;
+            }
             return current.Data;
         }
     }
 
     public void Add(T value)
     {
-        var newNode = new MyNode<T>(value);
+        MyNode<T> newNode = new MyNode<T>(value);
         //Si la lista está vacía, el nuevo nodo es tanto el primero como el último.
         if (IsEmpty())
         {
@@ -44,18 +50,24 @@ public class MyLinkedList<T>
 
     public void AddRange(MyLinkedList<T> values)
     {
-        for (int i = 0; i < values.Count; i++) Add(values[i]);
+        for (int i = 0; i < values.Count; i++)
+        {
+            Add(values[i]);
+        }
     }
 
     public void AddRange(T[] values)
     {
         //Recorre la lista y los agrega uno por uno. aunque creo q esta algo mal 
-        foreach (var value in values) Add(value);
+        foreach (T value in values)
+        {
+            Add(value);
+        }
     }
 
     public bool Remove(T value)
     {
-        var current = root;
+        MyNode<T> current = root;
         while (current != null)
         {
             if (EqualityComparer<T>.Default.Equals(current.Data, value))
@@ -82,4 +94,50 @@ public class MyLinkedList<T>
         return false;
     }
 
+    public bool RemoveAt(int index)
+    {
+        if (index < 0 || index >= Count)
+        {
+            return false;
+        }
+
+        MyNode<T> current = root;
+
+        //Recorre la lista hasta el índice deseado
+
+        for (int i = 0; i < index; i++)
+        {
+            current = current.Next;
+        }
+
+        return Remove(current.Data);
+    }
+
+    public void Clear()
+    {
+        root = null;
+        tail = null;
+        Count = 0;
+    } 
+
+    public bool IsEmpty()
+    {
+        return Count == 0;
+    }
+    
+    public override string ToString()
+    {
+        StringBuilder sb = new StringBuilder();
+        MyNode<T> current = root;
+        while (current != null)
+        {
+            sb.Append(current.Data.ToString());
+            if (current.Next != null)
+            {
+                sb.Append(" <-> ");
+            }
+            current = current.Next;
+        }
+        return sb.ToString();
+    }
 }
