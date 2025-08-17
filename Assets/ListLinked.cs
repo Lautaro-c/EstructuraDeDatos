@@ -4,18 +4,23 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+//Define una clase genérica que puede almacenar cualquier tipo de dato (T)
+
 public class MyLinkedList<T>
 {
     //chequea cual es el primer nodo y el ultimo
     private MyNode<T> root;
     private MyNode<T> tail;
+
+    //Es libre para leer pero no para escribir, solo puede modificarse internamente
     public int Count { get; private set; }
 
+    //Constructor que inicializa la lista vacía
     public T this[int index]
     {
         get
         {
-            //Verifica que el índice esté dentro del rango válido
+            //Verifica que el índice esté dentro del rango válido sino te devuelve el valor por defecto de T
             if (index < 0 || index >= Count)
             {
                 return default(T);
@@ -29,7 +34,7 @@ public class MyLinkedList<T>
             return current.Data;
         }
     }
-
+    //Crea un nuevo nodo con el valor dado.
     public void Add(T value)
     {
         MyNode<T> newNode = new MyNode<T>(value);
@@ -48,6 +53,8 @@ public class MyLinkedList<T>
         Count++;
     }
 
+    // Recorre otra lista personalizada y agrega cada elemento usando Add.
+
     public void AddRange(MyLinkedList<T> values)
     {
         for (int i = 0; i < values.Count; i++)
@@ -64,7 +71,7 @@ public class MyLinkedList<T>
             Add(value);
         }
     }
-
+    //Busca el nodo con el valor especificado
     public bool Remove(T value)
     {
         MyNode<T> current = root;
@@ -85,7 +92,7 @@ public class MyLinkedList<T>
                     current.Next.Previous = current.Previous;
                 }
                 else tail = current.Previous;
-
+                //Reduce el contador y confirma que se eliminó
                 Count--;
                 return true;
             }
@@ -131,11 +138,14 @@ public class MyLinkedList<T>
         MyNode<T> current = root;
         while (current != null)
         {
+            //Convierte el dato almacenado en el nodo (current.Data) a texto usando ToString() y lo agrega al StringBuilder.
             sb.Append(current.Data.ToString());
+            //Si el nodo actual tiene un siguiente (Next), se agrega el separador " <-> " para representar la conexión entre nodos.
             if (current.Next != null)
             {
                 sb.Append(" <-> ");
             }
+            //Mueve el puntero current al siguiente nodo en la lista.
             current = current.Next;
         }
         return sb.ToString();
