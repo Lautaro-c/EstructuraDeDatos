@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+
 
 public class MyNode<T>
 {
@@ -13,6 +13,17 @@ public class MyNode<T>
         Data = data;
         Next = null;
         Previous = null;
+    }
+
+    public bool IsEquals(T value)
+    {
+        return EqualityComparer<T>.Default.Equals(Data, value);
+    }
+
+    // Devuelve una representación en texto del nodo
+    public override string ToString()
+    {
+        return Data != null ? Data.ToString() : "null";
     }
 }
 
