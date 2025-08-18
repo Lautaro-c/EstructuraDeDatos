@@ -125,13 +125,13 @@ public class MyLinkedList<T>
         root = null;
         tail = null;
         Count = 0;
-    } 
+    }
 
     public bool IsEmpty()
     {
         return Count == 0;
     }
-    
+
     public override string ToString()
     {
         StringBuilder sb = new StringBuilder();
@@ -151,3 +151,4 @@ public class MyLinkedList<T>
         return sb.ToString();
     }
 }
+
