@@ -14,26 +14,15 @@ public class StoreInventory
     }
     public Item GetItemByName(string nombre)
     {
-        for (int i = 0; i < items.Count; i++)
+        foreach (var item in items.Values) // key, values
         {
-            if (items[i].Nombre == nombre) return items[i];
+            if (item.Nombre == nombre)
+            {
+                return item;
+            } 
         }
         return null;
     }
 
 }
 
-
-
- //private Item[] items;
-    //private int[] keys;
-    //private int[] amount;
-    //private int count;
-
-    //public StoreInventory(int size, int id, string nombre, int precio, string rareza, string tipo)
-    //{
-    //    items = new Item[size];
-    //    keys = new int[id];
-    //    amount = new int[size];
-    //    count = 0;
-    //}
