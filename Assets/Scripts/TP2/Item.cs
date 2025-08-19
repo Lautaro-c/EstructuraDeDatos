@@ -9,14 +9,16 @@ public class Item
     public int Precio;
     public string Rareza;
     public string Tipo;
+    public int Cantidad;
 
-    public Item(int id, string nombre, int precio, string rareza, string tipo)
+    public Item(int id, string nombre, int precio, string rareza, string tipo, int cantidad)
     {
         ID = id;
         Nombre = nombre;
         Precio = precio;
         Rareza = rareza;
         Tipo = tipo;
+        Cantidad = cantidad;
     }
 }
 
