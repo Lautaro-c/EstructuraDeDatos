@@ -10,27 +10,27 @@ public class SimpleList<T> : ISimpleList<T>
     T[] genericArray;
     const int defaultSize = 5;
     private int count = 0;
-    public T this[int index] 
-    { 
-        get 
-        { 
-            return genericArray[index]; 
-        } 
-        set 
+    public T this[int index]
+    {
+        get
+        {
+            return genericArray[index];
+        }
+        set
         {
             genericArray[index] = value;
-        } 
+        }
     }
 
-    public int Count 
-    {  
-        get 
-        { 
-            return count; 
-        } 
+    public int Count
+    {
+        get
+        {
+            return count;
+        }
     }
 
-    public SimpleList() 
+    public SimpleList()
     {
         genericArray = new T[defaultSize];
     }
@@ -69,7 +69,6 @@ public class SimpleList<T> : ISimpleList<T>
         for (int i = 0; i < genericArray.Length; i++)
         {
             Remove(genericArray[i]);
-            count--;
         }
     }
 
@@ -79,11 +78,17 @@ public class SimpleList<T> : ISimpleList<T>
         {
             if (genericArray[i].Equals(item))
             {
+                for (int j = i; j < genericArray.Length - 1; j++)
+                {
+                    genericArray[j] = genericArray[j + 1];
+                }
+                genericArray[count - 1] = default(T);
+
                 count--;
-                Remove(genericArray[i]);
                 return true;
-            }       
+            }
         }
+
         return false;
     }
 }

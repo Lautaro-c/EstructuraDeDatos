@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class ListManager : MonoBehaviour
+public class MyLinkedListManager : MonoBehaviour
 {
-    private SimpleList<int> list;
+    private MyLinkedList<int> linkedList;
     private int secondsToDeactivate = 2;
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TextMeshProUGUI lastNumText;
@@ -22,12 +20,12 @@ public class ListManager : MonoBehaviour
 
     private void Start()
     {
-        list = new SimpleList<int>();
+        linkedList = new MyLinkedList<int>();
     }
 
     private void Update()
     {
-        countText.text = "Count: " + list.Count.ToString();
+        countText.text = "Count: " + linkedList.Count.ToString();
         UpdateLastNumText();
     }
 
@@ -35,9 +33,8 @@ public class ListManager : MonoBehaviour
     {
         if (int.TryParse(addInputField.text, out int result))
         {
-            list.Add(result);
+            linkedList.Add((int)result); // Explicitly cast to resolve ambiguity  
             Debug.Log("Número ingresado: " + result);
-            
         }
         else
         {
@@ -49,7 +46,7 @@ public class ListManager : MonoBehaviour
     {
         string input = numRangeInputField.text;
         string[] parts = input.Split(',');
-        int[] partsNumbers = new int[parts.Length]; 
+        int[] partsNumbers = new int[parts.Length];
         for (int i = 0; i < parts.Length; i++)
         {
             if (int.TryParse(parts[i], out int number))
@@ -57,36 +54,38 @@ public class ListManager : MonoBehaviour
                 partsNumbers[i] = number;
             }
         }
-        list.AddRange(partsNumbers);
+        linkedList.AddRange(partsNumbers);
     }
 
     public void UpdateLastNumText()
     {
-        if (list.Count > 0)
+        if (linkedList.Count > 0)
         {
-            lastNumText.text = "Last number added: " + list[list.Count - 1].ToString();
-        }else
+            lastNumText.text = "Last number added: " + linkedList[linkedList.Count - 1].ToString();
+        }
+        else
         {
             lastNumText.text = "Last number added: ";
         }
     }
 
     public void ClearNumbers()
-    { 
-        list.Clear(); 
+    {
+        linkedList.Clear();
     }
 
     public void RemoveNumber()
     {
         if (int.TryParse(removeInputField.text, out int result))
         {
-            if (list.Remove(result))
+            if (linkedList.Remove(result))
             {
                 Debug.Log("Número borrado: " + result);
                 tickSign.SetActive(true);
-            }else
-            { 
-                crossSing.SetActive(true); 
+            }
+            else
+            {
+                crossSing.SetActive(true);
             }
             Invoke("DeactivateSigns", secondsToDeactivate);
         }
@@ -100,7 +99,7 @@ public class ListManager : MonoBehaviour
     {
         if (int.TryParse(numIDInputField.text, out int result))
         {
-            actualValueText.text = "Actual value: " + list[result].ToString();
+            actualValueText.text = "Actual value: " + linkedList[result].ToString();
         }
         else
         {
@@ -112,9 +111,10 @@ public class ListManager : MonoBehaviour
     {
         if (int.TryParse(numIDInputField.text, out int result) && int.TryParse(newNumInputField.text, out int result2))
         {
-            if (list.Count - 1 >= result)
+            if (linkedList.Count - 1 >= result)
             {
-                list[result] = result2;
+                linkedList.RemoveAt(result);
+                linkedList.Add(result2);
             }
         }
         else
@@ -124,8 +124,8 @@ public class ListManager : MonoBehaviour
     }
 
     public void DeactivateSigns()
-    { 
+    {
         tickSign.SetActive(false);
-        crossSing.SetActive(false); 
+        crossSing.SetActive(false);
     }
 }

@@ -875,8 +875,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758415125}
-        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: AddNumbersRange
         m_Mode: 1
         m_Arguments:
@@ -1077,8 +1077,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758415125}
-        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: RemoveNumber
         m_Mode: 1
         m_Arguments:
@@ -1436,8 +1436,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758415125}
-        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: AddNumber
         m_Mode: 1
         m_Arguments:
@@ -1638,8 +1638,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758415125}
-        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: ChangeValue
         m_Mode: 1
         m_Arguments:
@@ -2799,8 +2799,8 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758415125}
-        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: ShowNumValue
         m_Mode: 1
         m_Arguments:
@@ -3315,8 +3315,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1758415125}
-        m_TargetAssemblyTypeName: ListManager, Assembly-CSharp
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: ClearNumbers
         m_Mode: 1
         m_Arguments:
@@ -4594,6 +4594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1758415124}
   - component: {fileID: 1758415125}
+  - component: {fileID: 1758415126}
   m_Layer: 0
   m_Name: ListManager
   m_TagString: Untagged
@@ -4623,9 +4624,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758415123}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a37dccff44b412a4bbdb41ae5add2873, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countText: {fileID: 47914337}
+  lastNumText: {fileID: 196583227}
+  actualValueText: {fileID: 578594601}
+  addInputField: {fileID: 320145636}
+  removeInputField: {fileID: 293007714}
+  numIDInputField: {fileID: 761580361}
+  newNumInputField: {fileID: 357739943}
+  numRangeInputField: {fileID: 280514949}
+  tickSign: {fileID: 8189813}
+  crossSing: {fileID: 870192423}
+--- !u!114 &1758415126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758415123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7da5b1a45275848867f590e531f042, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 47914337}
