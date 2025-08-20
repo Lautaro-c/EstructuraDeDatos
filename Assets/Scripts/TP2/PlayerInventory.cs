@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInventory
+public class PlayerInventory//: IComparer
 {
     private int money;
     public int Money {  get { return money; } set {  money = value; } }
@@ -14,4 +14,9 @@ public class PlayerInventory
     { 
         money = 500;
     }
+
+    //public int Compare(Item item1, Item item2)
+    //{
+        
+    //}
 }
