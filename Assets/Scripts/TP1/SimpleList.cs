@@ -91,4 +91,10 @@ public class SimpleList<T> : ISimpleList<T>
 
         return false;
     }
+
+    public void RemoveAt(int index)
+    {
+        genericArray[index] = default(T);
+    } 
+
 }

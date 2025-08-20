@@ -31,7 +31,7 @@ public class SellBuyManager: MonoBehaviour
     public void ShowItemInfo()
     {
         string nombreItem = buyDropdown.options[buyDropdown.value].text;
-        Item item = storeInventory.GetItemByName(nombreItem);
+        TValue item = storeInventory.GetItemByName(nombreItem);
         itemPrice.text = item.Precio.ToString();
         itemName.text = item.Nombre;
         
@@ -52,7 +52,7 @@ public class SellBuyManager: MonoBehaviour
     public void ShowSellItemInfo()
     {
         string nombreItem = sellDropdown.options[sellDropdown.value].text;
-        Item item = storeInventory.GetItemByName(nombreItem);
+        TValue item = storeInventory.GetItemByName(nombreItem);
         int newPrice = item.Precio;
         newPrice = (newPrice * 90) / 100;
         itemSellPrice.text = newPrice.ToString();
@@ -82,16 +82,16 @@ public class SellBuyManager: MonoBehaviour
     public void BuyDropdown()
     {
         string nombreItem = buyDropdown.options[buyDropdown.value].text;
-        Item item = storeInventory.GetItemByName(nombreItem);
+        TValue item = storeInventory.GetItemByName(nombreItem);
         Buy(item);
     }
     public void SellDropdown()
     {
         string nombreItem = sellDropdown.options[sellDropdown.value].text;
-        Item item = storeInventory.GetItemByName(nombreItem);
+        TValue item = storeInventory.GetItemByName(nombreItem);
         Sell(item);
     }
-    public void Buy(Item item)
+    public void Buy(TValue item)
     {
         if (item == null) return;
         if (playerInventory.Money >= item.Precio)
@@ -116,7 +116,7 @@ public class SellBuyManager: MonoBehaviour
         }
         ShowSellItemInfo();
     }
-    public void Sell(Item item)
+    public void Sell(TValue item)
     {
         if (item == null) return;
         if (playerInventory.PlayerItems.ContainsKey(item.ID))

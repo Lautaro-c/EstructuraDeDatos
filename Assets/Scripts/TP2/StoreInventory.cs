@@ -3,16 +3,16 @@ using System.Collections.Generic;
 
 public class StoreInventory
 {
-    private Dictionary<int, Item> items = new Dictionary<int, Item>();
+    private Dictionary<int, TValue> items = new Dictionary<int, TValue>();
 
     public StoreInventory() 
     {
-        items.Add(1, new Item(1, "Manzana", 50, "Comun", "Fruta", 0));
-        items.Add(2, new Item(2, "Tomate", 40, "Raro", "Fruta", 0));
-        items.Add(3, new Item(3, "Pera", 80, "Comun", "Fruta", 0));
-        items.Add(4, new Item(4, "Chaucha", 20, "Raro", "Verdura", 0));
+        items.Add(1, new TValue(1, "Manzana", 50, "Comun", "Fruta", 0));
+        items.Add(2, new TValue(2, "Tomate", 40, "Raro", "Fruta", 0));
+        items.Add(3, new TValue(3, "Pera", 80, "Comun", "Fruta", 0));
+        items.Add(4, new TValue(4, "Chaucha", 20, "Raro", "Verdura", 0));
     }
-    public Item GetItemByName(string nombre)
+    public TValue GetItemByName(string nombre)
     {
         foreach (var item in items.Values) // key, values
         {

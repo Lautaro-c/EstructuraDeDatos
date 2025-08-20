@@ -119,7 +119,14 @@ public class MyLinkedList<T>
 
         return Remove(current.Data);
     }
-
+    public void Insert(int index, T value)
+    {
+        if (Count - 1 >= index)
+        {
+            RemoveAt(index);
+            Add(value);
+        }
+    }
     public void Clear()
     {
         root = null;
@@ -134,21 +141,31 @@ public class MyLinkedList<T>
 
     public override string ToString()
     {
-        StringBuilder sb = new StringBuilder();
+        string value = "";
         MyNode<T> current = root;
         while (current != null)
         {
             //Convierte el dato almacenado en el nodo (current.Data) a texto usando ToString() y lo agrega al StringBuilder.
-            sb.Append(current.Data.ToString());
+            
+            value += current.ToString();
             //Si el nodo actual tiene un siguiente (Next), se agrega el separador " <-> " para representar la conexión entre nodos.
             if (current.Next != null)
             {
-                sb.Append(" <-> ");
+                value += " <-> ";
             }
             //Mueve el puntero current al siguiente nodo en la lista.
             current = current.Next;
         }
-        return sb.ToString();
+        return value;
     }
+
+    /*public bool TryExample(out T value)
+    {
+        if()
+        {
+            value = exampleDict[key]
+                return true;
+        }
+    }*/
 }
 

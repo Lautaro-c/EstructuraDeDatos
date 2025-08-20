@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class MyLinkedListManager : MonoBehaviour
@@ -106,16 +107,12 @@ public class MyLinkedListManager : MonoBehaviour
             Debug.LogWarning("No se ingresó un número válido.");
         }
     }
-
+    
     public void ChangeValue()
     {
         if (int.TryParse(numIDInputField.text, out int result) && int.TryParse(newNumInputField.text, out int result2))
         {
-            if (linkedList.Count - 1 >= result)
-            {
-                linkedList.RemoveAt(result);
-                linkedList.Add(result2);
-            }
+            linkedList.Insert(result, result2);
         }
         else
         {
