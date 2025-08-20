@@ -21,6 +21,7 @@ public class SellBuyManager: MonoBehaviour
     [SerializeField] private Button buyButton;
     [SerializeField] private Button sellButton;
     [SerializeField] private TMP_Text playerMoney;
+    [SerializeField] private TMP_Text fruitAmount;
     private void Start()
     {
         storeInventory = new StoreInventory();
@@ -33,6 +34,7 @@ public class SellBuyManager: MonoBehaviour
         Item item = storeInventory.GetItemByName(nombreItem);
         itemPrice.text = item.Precio.ToString();
         itemName.text = item.Nombre;
+        
 
         switch (item.Nombre)
         {
@@ -67,6 +69,14 @@ public class SellBuyManager: MonoBehaviour
             case "Tomate":
                 sellButton.image.sprite = spriteTomate;
                 break;
+        }
+        if (playerInventory.PlayerItems.ContainsKey(item.ID))
+        {
+            fruitAmount.text = playerInventory.PlayerItems[item.ID].ToString();
+        }
+        else
+        {
+            fruitAmount.text = "0";
         }
     }
     public void BuyDropdown()
@@ -104,6 +114,7 @@ public class SellBuyManager: MonoBehaviour
         {
             Debug.Log("No tenes suficiente plata");
         }
+        ShowSellItemInfo();
     }
     public void Sell(Item item)
     {
