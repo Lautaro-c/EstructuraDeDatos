@@ -8,6 +8,7 @@ public class MyStack<T>
     private SimpleList<T> list;
     public int Count => count;
 
+
     public MyStack()
     {
         list = new SimpleList<T>();
