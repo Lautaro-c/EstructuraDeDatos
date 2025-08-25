@@ -6,7 +6,7 @@ using UnityEngine;
 public class ManagerUI : MonoBehaviour
 {
     [SerializeField] private TMP_Dropdown moveDropdown;
-    [SerializeField] private TMP_Text positionText;
+    [SerializeField] private TextMeshProUGUI positionText;
     [SerializeField] private Button moveButton;
     [SerializeField] private Button undoButton;
 
@@ -20,6 +20,11 @@ public class ManagerUI : MonoBehaviour
 
         moveButton.onClick.AddListener(HandleMove);
         undoButton.onClick.AddListener(HandleUndo);
+        UpdateUI();
+    }
+
+    private void Update()
+    {
         UpdateUI();
     }
 
