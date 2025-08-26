@@ -31,7 +31,9 @@ public class MyQueue<T>
     public T Dequeue() //lee el primer elemento y lo elimina
     {
         T item = genericArray[0];
-        for (int i = 1; i < Count; i++)
+        if (count > 0)
+        {
+            for (int i = 1; i < Count; i++)
         {
             //Elemento actual
             //genericArray[i]
@@ -45,9 +47,12 @@ public class MyQueue<T>
             //Copiamos el actual al anterior
             genericArray[i-1] = genericArray[i];
         }
-
         count--;
-
+        }
+        else
+        {
+            return default(T);
+        }
         return item;
     }
     public T Peek() //lee el primer elemento.
@@ -85,12 +90,11 @@ public class MyQueue<T>
         string toString = "";
         if (count > 0)
         {
-
             for (int i = 0; i < count; i++)
             {
                 toString += genericArray[i].ToString() + " ";
             }
-            return toString;
+            //return toString;
         }
         return toString;
     }
