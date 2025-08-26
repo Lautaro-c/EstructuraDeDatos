@@ -37,7 +37,7 @@ public class MyStack<T>
     public void Clear()
     {
         list.Clear();
-        count = 0;
+        count = list.Count;
     }
 
     public T[] ToArray()

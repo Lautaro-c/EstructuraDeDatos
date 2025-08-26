@@ -95,6 +95,7 @@ public class SimpleList<T> : ISimpleList<T>
     public void RemoveAt(int index)
     {
         genericArray[index] = default(T);
+        count--;
     } 
 
 }
