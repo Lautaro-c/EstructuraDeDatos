@@ -31,7 +31,7 @@ public class MyStack<T>
 
     public T Peek()
     {
-        return list[0];
+        return list[list.Count - 1];
     }
 
     public void Clear()
