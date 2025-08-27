@@ -8,14 +8,14 @@ public class PlayerMovement : MonoBehaviour
     private float horizontalInput;
     public float HorizontalInput => horizontalInput;
 
-    private Shadow shadow;
+    private ShadowManager shadow;
     private bool collided;
     public bool Collided => collided;
 
     public GameObject specificShadow;
     void Start()
     {
-        shadow = FindAnyObjectByType<Shadow>();
+        shadow = FindAnyObjectByType<ShadowManager>();
     }
     void Update()
     {

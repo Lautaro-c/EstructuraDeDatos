@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shadow : MonoBehaviour 
+public class ShadowManager : MonoBehaviour 
 {
     [SerializeField] private GameObject shadow;
     private MyQueue<float> queue;
-
+    public float counterAmount;
     private PlayerMovement playerMovement;
     private bool isCollided = false;
     private void Start()
@@ -21,6 +21,7 @@ public class Shadow : MonoBehaviour
     public void MovementEnqueue()
     {
         queue.Enqueue(playerMovement.HorizontalInput);
+        counterAmount = queue.Count;
     }
     public void ShadowDequeue()
     {
@@ -37,11 +38,4 @@ public class Shadow : MonoBehaviour
         playerMovement.specificShadow.GetComponent<ShadowMovement>().Movement(queue.Dequeue());
     }
 
-   
-    //IEnumerator ShadowSpawner()
-    //{
-    //    Vector2 trans = queue.Dequeue();
-    //    GameObject newShadow = Instantiate(shadow, trans, Quaternion.identity);
-    //    yield return new WaitForSeconds(1f);
-    //}
 }

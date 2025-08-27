@@ -14,7 +14,7 @@ public class ShadowMovement : MonoBehaviour
         {
             if (collision.CompareTag("Door"))
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
