@@ -73,7 +73,7 @@ public class Ej5PlayerMovement : MonoBehaviour
     }
     private void Undo()
     {
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z) && stacksStack.Count > 0)
         {
             switch (stacksStack.Peek())
             {

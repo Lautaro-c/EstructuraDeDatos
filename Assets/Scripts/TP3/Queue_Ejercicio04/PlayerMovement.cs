@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     {
         shadow = FindAnyObjectByType<ShadowManager>();
     }
-    void Update()
+    void FixedUpdate()
     {
         Walk();
     }

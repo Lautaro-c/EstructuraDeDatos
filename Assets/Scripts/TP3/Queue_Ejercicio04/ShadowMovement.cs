@@ -6,14 +6,14 @@ using UnityEngine;
 public class ShadowMovement : MonoBehaviour
 {
     private ShadowManager shadowManager;
+    private float speed = 5f;
     private void Start()
     {
         shadowManager = FindAnyObjectByType<ShadowManager>();
     }
     public void Movement(float horizontalInput)
     {
-        transform.Translate(Vector2.right * horizontalInput * 5f * Time.deltaTime);
-        
+        transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime);    
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -24,6 +24,7 @@ public class ShadowMovement : MonoBehaviour
                 this.gameObject.SetActive(false);
                 shadowManager.Queue.Clear();
                 Debug.Log("SHADOW COLISION PUERTA");
+                Destroy(this.gameObject);
             }
         }
     }

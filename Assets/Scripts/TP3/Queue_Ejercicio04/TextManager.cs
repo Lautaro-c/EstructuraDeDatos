@@ -6,14 +6,14 @@ using UnityEngine;
 public class TextManager : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textMesh;
-    private ShadowManager shadowManager;
+    [SerializeField]private ShadowManager shadowManager;
     void Start()
     {
         //textMesh = GetComponent<TextMeshProUGUI>();
-        shadowManager = GetComponent<ShadowManager>();
+        //shadowManager = GetComponent<ShadowManager>();
     }
-    void FixedUpdate()
+    void Update()
     {
-        textMesh.text = "Inputs in queue: " + shadowManager.counterAmount.ToString();
+        textMesh.text = "Inputs in queue: " + shadowManager.Queue.Count.ToString();
     }
 }

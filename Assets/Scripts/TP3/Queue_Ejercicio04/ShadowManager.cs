@@ -15,28 +15,22 @@ public class ShadowManager : MonoBehaviour
         queue = new MyQueue<float>();
         playerMovement = FindAnyObjectByType<PlayerMovement>();
     }
-    private void Update()
-    {
-    }
 
     public void MovementEnqueue()
     {
         queue.Enqueue(playerMovement.HorizontalInput);
-        counterAmount = queue.Count;
     }
     public void ShadowDequeue()
     {
-        if(isCollided == false)
+        if (playerMovement.specificShadow != null)
         {
-            playerMovement.specificShadow.SetActive(true);
-            isCollided = true;
+            if (isCollided == false)
+            {
+                playerMovement.specificShadow.SetActive(true);
+                isCollided = true;
+            }
+            playerMovement.specificShadow.GetComponent<ShadowMovement>().Movement(queue.Dequeue());
         }
-        else 
-        {
-            //queue.Clear();
-        }
-        
-        playerMovement.specificShadow.GetComponent<ShadowMovement>().Movement(queue.Dequeue());
     }
 
 }

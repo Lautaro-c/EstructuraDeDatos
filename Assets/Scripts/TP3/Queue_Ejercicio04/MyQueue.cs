@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -27,6 +28,7 @@ public class MyQueue<T>
         T item = genericArray[0];
         if (count > 0)
         {
+
             for (int i = 1; i < Count; i++)
         {
             genericArray[i-1] = genericArray[i];
@@ -35,7 +37,7 @@ public class MyQueue<T>
         }
         else
         {
-            return default(T);
+            throw new Exception("Mensaje de error personalizado");
         }
         return item;
     }

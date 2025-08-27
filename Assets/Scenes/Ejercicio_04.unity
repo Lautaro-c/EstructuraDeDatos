@@ -219,7 +219,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -291,6 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textMesh: {fileID: 1335093213}
+  shadowManager: {fileID: 503876428}
 --- !u!1 &678025569
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,17 +1093,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 195161356533675663, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1330314139937578420, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
       propertyPath: specificShadow
       value: 
       objectReference: {fileID: 488633020}
     - target: {fileID: 1983366315082919409, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.422735
+      value: -8.14
       objectReference: {fileID: 0}
     - target: {fileID: 1983366315082919409, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.279686
+      value: -3.37
       objectReference: {fileID: 0}
     - target: {fileID: 1983366315082919409, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1144,17 +1149,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1330314139937578420, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2996577550665715698, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 488633025}
+      insertIndex: 2
+      addedObject: {fileID: 488633026}
     - targetCorrespondingSourceObject: {fileID: 2996577550665715698, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 488633026}
+      addedObject: {fileID: 488633025}
   m_SourcePrefab: {fileID: 100100000, guid: 927a561df23191c48bd2640fd0394bce, type: 3}
 --- !u!1 &2074146115
 GameObject:
