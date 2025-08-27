@@ -31,7 +31,6 @@ public class ShadowManager : MonoBehaviour
         }
         else
         {
-            
             queue.Clear();
         }
         
