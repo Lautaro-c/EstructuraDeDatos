@@ -6,6 +6,7 @@ public class ShadowManager : MonoBehaviour
 {
     [SerializeField] private GameObject shadow;
     private MyQueue<float> queue;
+    public MyQueue<float> Queue => queue;
     public float counterAmount;
     private PlayerMovement playerMovement;
     private bool isCollided = false;
@@ -28,10 +29,11 @@ public class ShadowManager : MonoBehaviour
         if(isCollided == false)
         {
             playerMovement.specificShadow.SetActive(true);
+            isCollided = true;
         }
-        else
+        else 
         {
-            queue.Clear();
+            //queue.Clear();
         }
         
         playerMovement.specificShadow.GetComponent<ShadowMovement>().Movement(queue.Dequeue());

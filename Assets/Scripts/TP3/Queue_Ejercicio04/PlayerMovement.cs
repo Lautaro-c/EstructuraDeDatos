@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         if (horizontalInput != 0 && collided == false) 
         {
             shadow.MovementEnqueue();
-            Debug.Log("Enqueue");
+            //Debug.Log("Enqueue");
         }
         if(collided)
         {

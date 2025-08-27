@@ -54,11 +54,14 @@ public class MyQueue<T>
     }
     public void Clear() //borra todos los elementos de la lista
     {
+        Debug.Log("CLEAR");
+        Debug.Log("COUNT BEFORE: " + count);
         for (int i = 0; i < genericArray.Length; i++)
         {   
             genericArray[i] = default(T);
         }
         count = 0;
+        Debug.Log("COUNT NOW: " + count);
     }
     public T[] ToArray()
     {
