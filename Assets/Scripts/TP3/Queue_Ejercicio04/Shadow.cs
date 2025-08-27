@@ -5,34 +5,43 @@ using UnityEngine;
 public class Shadow : MonoBehaviour 
 {
     [SerializeField] private GameObject shadow;
-
-    private MyQueue<Vector2> queue;
+    private MyQueue<float> queue;
 
     private PlayerMovement playerMovement;
-
+    private bool isCollided = false;
     private void Start()
     {
-        queue = new MyQueue<Vector2>();
+        queue = new MyQueue<float>();
         playerMovement = FindAnyObjectByType<PlayerMovement>();
     }
     private void Update()
     {
-        if (playerMovement.Collided)
+    }
+
+    public void MovementEnqueue()
+    {
+        queue.Enqueue(playerMovement.HorizontalInput);
+    }
+    public void ShadowDequeue()
+    {
+        if(isCollided == false)
         {
-            EnqueuePlayer();
+            playerMovement.specificShadow.SetActive(true);
         }
+        else
+        {
+            
+            queue.Clear();
+        }
+        
+        playerMovement.specificShadow.GetComponent<ShadowMovement>().Movement(queue.Dequeue());
     }
-    private void EnqueuePlayer()
-    {
-        queue.Enqueue(playerMovement.transform.position);
-        StartCoroutine(ShadowSpawner());
-    }
-    IEnumerator ShadowSpawner()
-    {
-        Vector2 trans = queue.Dequeue();
-        GameObject newShadow = Instantiate(shadow, trans, Quaternion.identity);
-        yield return new WaitForSeconds(1f);
-        Destroy(newShadow );
-    }
-    
+
+   
+    //IEnumerator ShadowSpawner()
+    //{
+    //    Vector2 trans = queue.Dequeue();
+    //    GameObject newShadow = Instantiate(shadow, trans, Quaternion.identity);
+    //    yield return new WaitForSeconds(1f);
+    //}
 }
