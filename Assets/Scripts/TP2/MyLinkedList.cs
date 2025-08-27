@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Unity.VisualScripting;
 
 
 //Define una clase genérica que puede almacenar cualquier tipo de dato (T)
@@ -32,6 +33,18 @@ public class MyLinkedList<T>
                 current = current.Next;
             }
             return current.Data;
+        }
+        set
+        {
+            if (index > 0 || index <= Count)
+            {
+                MyNode<T> current = root;
+                for (int i = 0; i < index; i++)
+                {
+                    current = current.Next;
+                }
+                current.Data = value;
+            }
         }
     }
     //Crea un nuevo nodo con el valor dado.
