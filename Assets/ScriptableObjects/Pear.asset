@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bdf01874f03ca2459b3283e740b819f, type: 3}
+  m_Name: Pear
+  m_EditorClassIdentifier: 
+  <Item>k__BackingField:
+    id: 1
+    name: Pear
+    price: 15
+    sprite: {fileID: -9068026601010511230, guid: 4e847260be96eec4bb7b8cb78527f200, type: 3}
