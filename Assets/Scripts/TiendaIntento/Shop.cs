@@ -1,33 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Shop : MonoBehaviour
 {
     //ID, Cantidad
-    Dictionary<int, int> itemStock;
-    [SerializeField] SimpleList<int> itemQuantities;
+    Dictionary<int, ItemSO> itemStock;
     [SerializeField] ItemListSO shopItems;
-    //[SerializeField] ItemSO[] shopItems;
 
     void Start()
     {
         //Inicializamos el diccionario
-        itemStock = new Dictionary<int, int>();
-        itemQuantities = new SimpleList<int>(shopItems.items.Length);
+        itemStock = new Dictionary<int, ItemSO>();
+        //itemQuantities = new SimpleList<int>(shopItems.items.Length);
+
         for (int i = 0; i < shopItems.items.Length; i++)
         {
-            itemQuantities[i] = 1;
-        }
-        for (int i = 0; i < shopItems.items.Length; i++)
-        {
-            itemStock.Add(shopItems.items[i].ID, itemQuantities[i]);
+            itemStock.Add(shopItems.items[i].ID, shopItems.items[i]);
         }
     }
-
+    public ItemSO SellItem(int itemId)
+    {
+        if (!itemStock.ContainsKey(itemId))
+        {
+            return null;
+        }
+        ItemSO item = itemStock[itemId];
+        return item;
+    }
     public void BuyFromPlayer(ItemSO itemToBuy)
     {
-        if (itemStock.ContainsKey(itemToBuy.ID)) itemStock[itemToBuy.ID] += 1;
-        else itemStock.Add(itemToBuy.ID, 1);
+        if (itemStock.ContainsKey(itemToBuy.ID));
+        else itemStock.Add(itemToBuy.ID, itemToBuy);
     }
 }

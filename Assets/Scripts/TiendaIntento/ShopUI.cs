@@ -8,12 +8,14 @@ public class ShopUI : MonoBehaviour
     [SerializeField] GameObject itemPrefab;
     void Start()
     {
-        for (int i = 0; allItems.items.Length > 0; i++)
+        
+        for (int i = 0; i < allItems.items.Length; i++)
         {
             GameObject newItem = itemPrefab;
             Debug.Log(i.ToString());
             newItem.GetComponent<Image>().sprite = allItems.items[i].Sprite;
             Transform hijo = newItem.transform.Find("NameText");
+
             if (hijo != null)
             {
                 TextMeshProUGUI texto = hijo.GetComponent<TextMeshProUGUI>();
@@ -33,7 +35,7 @@ public class ShopUI : MonoBehaviour
             }
 
 
-            Instantiate(newItem);
+            Instantiate(newItem, transform);
 
         }
     }
@@ -41,10 +43,5 @@ public class ShopUI : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void UpdateShopStock()
-    {
-
     }
 }
