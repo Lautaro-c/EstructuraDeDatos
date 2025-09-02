@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
         {
             return null;
         }
-        ItemSO item = itemStock[itemId];
+        ItemSO item = itemStock[itemId]; 
         return item;
     }
     public void BuyFromPlayer(ItemSO itemToBuy)
