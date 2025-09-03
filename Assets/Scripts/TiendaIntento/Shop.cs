@@ -31,6 +31,7 @@ public class Shop : MonoBehaviour
     }
     public void BuyFromPlayer(ItemSO itemToBuy)
     {
+        
         if (itemStock.ContainsKey(itemToBuy.ID));
         else itemStock.Add(itemToBuy.ID, itemToBuy);
     }

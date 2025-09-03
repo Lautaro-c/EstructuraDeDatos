@@ -58,8 +58,9 @@ public class PlayerShop : MonoBehaviour
                 }
             }
             GameObject instantiatedItem = Instantiate(newItem, transform);
-            //instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
-            // instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
+            instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
+            instantiatedItem.GetComponent<Button>().onClick.AddListener(() => shop.BuyFromPlayer(item));
+            instantiatedItem.GetComponent<Button>().onClick.AddListener(() => RemoveItem(item));
             instantiatedItem.SetActive(false);
             playerItems.Add(instantiatedItem);
         }
@@ -84,6 +85,16 @@ public class PlayerShop : MonoBehaviour
             }
         }
     }
+
+    private void RemoveItem(ItemSO item)
+    {
+        if(item != null)
+        {
+            money += item.ItemPrice;
+            itemQuantities2[item.ID] -= 1;
+            UpdateUI();
+        }
+    }
     private void UpdateUI()
     { /*
         foreach (var kvp in itemQuantities)
@@ -98,7 +109,7 @@ public class PlayerShop : MonoBehaviour
         {
             if (kvp.Value > 0)
             {
-                Debug.Log("Actualize la UI: " +  kvp.Key);
+                Debug.Log("Pasamos el if");
                 playerItems[kvp.Key].gameObject.SetActive(true);
                 Transform amountTextTransform = playerItems[kvp.Key].transform.Find("AmountText");
                 if (amountTextTransform != null)
@@ -110,6 +121,10 @@ public class PlayerShop : MonoBehaviour
                     }
                 }
                 //allItems.items[kvp.Key].gameObject.SetActive(true);
+            }
+            else
+            {
+                playerItems[kvp.Key].gameObject.SetActive(false);
             }
         }
     }
