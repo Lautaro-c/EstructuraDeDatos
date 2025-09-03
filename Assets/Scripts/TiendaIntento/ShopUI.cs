@@ -31,7 +31,7 @@ public class ShopUI : MonoBehaviour
                 TextMeshProUGUI texto = hijo.GetComponent<TextMeshProUGUI>();
                 if (texto != null)
                 {
-                    texto.text = allItems.items[i].ItemPrice.ToString();
+                    texto.text = "$" + allItems.items[i].ItemPrice.ToString();
                 }
             }
             GameObject instantiatedItem = Instantiate(newItem, transform);
