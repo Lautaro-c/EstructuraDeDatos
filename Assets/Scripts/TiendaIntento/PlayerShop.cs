@@ -59,16 +59,12 @@ public class PlayerShop : MonoBehaviour
             }
             GameObject instantiatedItem = Instantiate(newItem, transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
-            instantiatedItem.GetComponent<Button>().onClick.AddListener(() => shop.BuyFromPlayer(item));
             instantiatedItem.GetComponent<Button>().onClick.AddListener(() => RemoveItem(item));
             instantiatedItem.SetActive(false);
             playerItems.Add(instantiatedItem);
         }
     }
-    void Update()
-    {
 
-    }
     public void BuyItem(ItemSO itemSO)
     {
         if (money >= itemSO.ItemPrice)
@@ -120,12 +116,12 @@ public class PlayerShop : MonoBehaviour
                         texto.text = "Amount: " + itemQuantities2[kvp.Key].ToString();
                     }
                 }
-                //allItems.items[kvp.Key].gameObject.SetActive(true);
             }
             else
             {
                 playerItems[kvp.Key].gameObject.SetActive(false);
             }
+            
         }
     }
 }

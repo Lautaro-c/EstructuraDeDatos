@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class MySelectionSort : MonoBehaviour
+public class MySelectionSort 
 {
     int minIndex = 0;
     public MyLinkedList<int> SortedLinkedList(MyLinkedList<int> list)

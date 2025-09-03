@@ -29,10 +29,4 @@ public class Shop : MonoBehaviour
         ItemSO item = itemStock[itemId]; 
         return item;
     }
-    public void BuyFromPlayer(ItemSO itemToBuy)
-    {
-        
-        if (itemStock.ContainsKey(itemToBuy.ID));
-        else itemStock.Add(itemToBuy.ID, itemToBuy);
-    }
 }
