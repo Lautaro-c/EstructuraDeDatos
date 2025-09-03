@@ -12,31 +12,35 @@ public class PlayerShop : MonoBehaviour
     [SerializeField] ItemListSO allItems;
     private SimpleList<GameObject> playerItems;
     private Dictionary<GameObject, int> itemQuantities;
+    private Dictionary<int, int> itemQuantities2;
     [SerializeField] GameObject itemPrefab;
 
     void Start()
     {
         itemQuantities = new Dictionary<GameObject, int>();
+        itemQuantities2 = new Dictionary<int, int>();
+        playerItems = new SimpleList<GameObject>();
 
         for (int i = 0; i < allItems.items.Length; i++)
         {
             GameObject newItem = itemPrefab;
             ItemSO item = allItems.items[i];
             newItem.GetComponent<Image>().sprite = item.Sprite;
-            Transform hijo = newItem.transform.Find("NameText");
+            Transform Children = newItem.transform.Find("NameText");
+            itemQuantities2.Add(item.ID, 0);
 
-            if (hijo != null)
+            if (Children != null)
             {
-                TextMeshProUGUI texto = hijo.GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI texto = Children.GetComponent<TextMeshProUGUI>();
                 if (texto != null)
                 {
                     texto.text = allItems.items[i].name;
                 }
             }
-            Transform hijo2 = newItem.transform.Find("PriceText");
-            if (hijo != null)
+            Transform Children2 = newItem.transform.Find("PriceText");
+            if (Children2 != null)
             {
-                TextMeshProUGUI texto = hijo.GetComponent<TextMeshProUGUI>();
+                TextMeshProUGUI texto = Children2.GetComponent<TextMeshProUGUI>();
                 if (texto != null)
                 {
                     texto.text = allItems.items[i].ItemPrice.ToString();
@@ -44,9 +48,9 @@ public class PlayerShop : MonoBehaviour
             }
             GameObject instantiatedItem = Instantiate(newItem, transform);
             //instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
-           // instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
-           instantiatedItem.SetActive(false);
-           playerItems.Add(instantiatedItem);
+            // instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
+            instantiatedItem.SetActive(false);
+            playerItems.Add(instantiatedItem);
         }
     }
     void Update()
@@ -61,7 +65,8 @@ public class PlayerShop : MonoBehaviour
             if(itemSO1 != null)
             {
                 Debug.Log("Compre: " +  itemSO1.name);
-                itemQuantities[itemSO.ID] +=1;
+                itemQuantities2[itemSO.ID] += 1;
+                //itemQuantities[itemSO.ID] +=1;
                 UpdateUI();
                 money -= itemSO.ItemPrice;
                 Debug.Log(money.ToString());
@@ -69,12 +74,22 @@ public class PlayerShop : MonoBehaviour
         }
     }
     private void UpdateUI()
-    {
+    { /*
         foreach (var kvp in itemQuantities)
         {
             if(kvp.Value > 0)
             {
                 allItems.items[kvp.Key].gameObject.SetActive(true);
+            }
+        }*/
+
+        foreach (var kvp in itemQuantities2)
+        {
+            if (kvp.Value > 0)
+            {
+                Debug.Log("Actualize la UI: " +  kvp.Key);
+                playerItems[kvp.Key].gameObject.SetActive(true);
+                //allItems.items[kvp.Key].gameObject.SetActive(true);
             }
         }
     }

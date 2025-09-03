@@ -37,7 +37,6 @@ public class ShopUI : MonoBehaviour
             GameObject instantiatedItem = Instantiate(newItem, transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
             instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
-
         }
     }
 
