@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class ShopUI : MonoBehaviour
 {
     [SerializeField] ItemListSO allItems;
+    [SerializeField] private PlayerShop playerShop;
     [SerializeField] GameObject itemPrefab;
     void Start()
     {
@@ -12,8 +13,8 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < allItems.items.Length; i++)
         {
             GameObject newItem = itemPrefab;
-            Debug.Log(i.ToString());
-            newItem.GetComponent<Image>().sprite = allItems.items[i].Sprite;
+            ItemSO item = allItems.items[i];
+            newItem.GetComponent<Image>().sprite = item.Sprite;
             Transform hijo = newItem.transform.Find("NameText");
 
             if (hijo != null)
@@ -33,9 +34,9 @@ public class ShopUI : MonoBehaviour
                     texto.text = allItems.items[i].ItemPrice.ToString();
                 }
             }
-
-
-            Instantiate(newItem, transform);
+            GameObject instantiatedItem = Instantiate(newItem, transform);
+            instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
+            instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
 
         }
     }
