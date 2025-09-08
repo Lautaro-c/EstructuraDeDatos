@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     {
         //Inicializamos el diccionario
         itemStock = new Dictionary<int, ItemSO>();
-        //itemQuantities = new SimpleList<int>(shopItems.items.Length);
+       
 
         for (int i = 0; i < shopItems.items.Length; i++)
         {
@@ -29,4 +29,6 @@ public class Shop : MonoBehaviour
         ItemSO item = itemStock[itemId]; 
         return item;
     }
+
+
 }

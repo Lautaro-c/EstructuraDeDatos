@@ -11,6 +11,7 @@ public class MyLinkedListManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TextMeshProUGUI lastNumText;
     [SerializeField] private TextMeshProUGUI actualValueText;
+    [SerializeField] private TextMeshProUGUI emptyText;
     [SerializeField] private TMP_InputField addInputField;
     [SerializeField] private TMP_InputField removeInputField;
     [SerializeField] private TMP_InputField numIDInputField;
@@ -27,6 +28,7 @@ public class MyLinkedListManager : MonoBehaviour
     private void Update()
     {
         countText.text = "Count: " + linkedList.Count.ToString();
+        emptyText.text = "IsEmpty: " + linkedList.IsEmpty();
         UpdateLastNumText();
     }
 
