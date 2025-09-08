@@ -31,10 +31,10 @@ public class PlayerMovement : MonoBehaviour
             shadow.MovementEnqueue();
             //Debug.Log("Enqueue");
         }
-        if(collided)
+        /*if(collided)
         {
             shadow.ShadowDequeue();
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

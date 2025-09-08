@@ -28,12 +28,11 @@ public class MyQueue<T>
         T item = genericArray[0];
         if (count > 0)
         {
-
             for (int i = 1; i < Count; i++)
-        {
-            genericArray[i-1] = genericArray[i];
-        }
-        count--;
+            {
+                genericArray[i-1] = genericArray[i];
+            }
+            count--;
         }
         else
         {
