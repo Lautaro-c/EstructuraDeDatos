@@ -7,7 +7,7 @@ using Unity.VisualScripting;
 
 //Define una clase genérica que puede almacenar cualquier tipo de dato (T)
 
-public class MyLinkedList<T>
+public class MyLinkedList<T> : IIndexableList<T>
 {
     //chequea cual es el primer nodo y el ultimo
     private MyNode<T> root;

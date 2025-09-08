@@ -5,7 +5,7 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using static UnityEngine.UI.Image;
 
-public class SimpleList<T> : ISimpleList<T>
+public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
 {
     T[] genericArray;
     const int defaultSize = 5;
