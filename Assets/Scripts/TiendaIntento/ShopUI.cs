@@ -7,8 +7,8 @@ public enum SortCriteria
     ID,
     Name,
     Price,
-    Rareza,
-    Tipo
+    Rarity,
+    Tipe
 }
 
 public class ShopUI : MonoBehaviour
@@ -16,7 +16,6 @@ public class ShopUI : MonoBehaviour
     [SerializeField] ItemListSO allItems;
     [SerializeField] private PlayerShop playerShop;
     [SerializeField] GameObject itemPrefab;
-    [SerializeField] SortCriteria criterioSeleccionado;
     SimpleList<ItemSO> itemList = new SimpleList<ItemSO>();
 
     void Start()
@@ -26,7 +25,7 @@ public class ShopUI : MonoBehaviour
 
         // Ordenamos según el criterio
         ItemSOSorter sorter = new ItemSOSorter();
-        IIndexableList<ItemSO> sortedItems = ApplySort(itemList, criterioSeleccionado);
+        IIndexableList<ItemSO> sortedItems = ApplySort(itemList, SortCriteria.ID);
 
         // Instanciamos los ítems ordenados
         for (int i = 0; i < sortedItems.Count; i++)
@@ -59,7 +58,6 @@ public class ShopUI : MonoBehaviour
     private IIndexableList<ItemSO> ApplySort(IIndexableList<ItemSO> list, SortCriteria criterio)
     {
         ItemSOSorter sorter = new ItemSOSorter();
-
         switch (criterio)
         {
             case SortCriteria.ID:
@@ -68,35 +66,59 @@ public class ShopUI : MonoBehaviour
                 return sorter.SortBy(list, item => item.ItemName);
             case SortCriteria.Price:
                 return sorter.SortBy(list, item => item.ItemPrice);
-            case SortCriteria.Rareza:
+            case SortCriteria.Rarity:
                 return sorter.SortBy(list, item => item.Rareza);
-            case SortCriteria.Tipo:
+            case SortCriteria.Tipe:
                 return sorter.SortBy(list, item => item.Tipo);
             default:
                 return list;
         }
     }
 
-    public IIndexableList<ItemSO> SortByName()
+    public void SortByName()
     {
-       ApplySort(itemList, SortCriteria.Name);
+        SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Name);
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            Debug.Log(tempList[i].ItemName);
+        }
+        itemList = tempList;
     }
+    public void SortByPrice()
+    {
+        SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Price);
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            Debug.Log(tempList[i].ItemName);
+        }
+        itemList = tempList;
+    }
+
+    public void SortByRarity()
+    {
+        SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Rarity);
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            Debug.Log(tempList[i].ItemName);
+        }
+        itemList = tempList;
+    }
+
 }
-/*public class ShopUI : MonoBehaviour
+/*
+public class ShopUI : MonoBehaviour
 {
     [SerializeField] ItemListSO allItems;
     [SerializeField] private PlayerShop playerShop;
     [SerializeField] GameObject itemPrefab;
-
-
-
-
-
+    [SerializeField] private SimpleList<ItemSO> itemList;
+    private ItemSOSorter sorter;
     void Start()
-    {
-        
+    {  
+        sorter = new ItemSOSorter();
         for (int i = 0; i < allItems.items.Length; i++)
         {
+            itemList.Add(allItems.items[i]);
             GameObject newItem = itemPrefab;
             ItemSO item = allItems.items[i];
             newItem.GetComponent<Image>().sprite = item.Sprite;
@@ -125,9 +147,5 @@ public class ShopUI : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    } 
 }*/
 

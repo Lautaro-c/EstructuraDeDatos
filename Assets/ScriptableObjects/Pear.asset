@@ -15,5 +15,7 @@ MonoBehaviour:
   <Item>k__BackingField:
     id: 1
     name: Pear
-    price: 15
+    rareza: 1
+    tipo: 
+    price: 10
     sprite: {fileID: -9068026601010511230, guid: 4e847260be96eec4bb7b8cb78527f200, type: 3}

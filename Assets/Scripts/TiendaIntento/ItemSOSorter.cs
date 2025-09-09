@@ -17,7 +17,6 @@ public class ItemSOSorter
 
             list[j + 1] = key;
         }
-
         return list;
     }
 }

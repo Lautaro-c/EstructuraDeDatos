@@ -15,5 +15,7 @@ MonoBehaviour:
   <Item>k__BackingField:
     id: 0
     name: Apple
-    price: 10
+    rareza: 2
+    tipo: 
+    price: 15
     sprite: {fileID: -1389860050349794336, guid: ab635ba00eb981f4da19923dee4bf27a, type: 3}
