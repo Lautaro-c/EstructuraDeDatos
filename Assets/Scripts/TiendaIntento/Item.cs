@@ -10,6 +10,8 @@ public class Item
 
     //Las otras variables si son publicas
     public string name;
+    public int rareza;
+    public string tipo;
     public int price;
     public Sprite sprite;
 }

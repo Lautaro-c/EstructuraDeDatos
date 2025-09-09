@@ -13,5 +13,7 @@ public class ItemSO : ScriptableObject
     public string ItemName { get => Item.name; set { Item.name = value; } }
 
     public int ItemPrice { get => Item.price; set { Item.price = value; } }
+    public int Rareza { get => Item.rareza; set { Item.rareza = value; } }
+    public string Tipo { get => Item.tipo; set { Item.tipo = value; } }
     public Sprite Sprite { get => Item.sprite; set { Item.sprite = value; } }
 }

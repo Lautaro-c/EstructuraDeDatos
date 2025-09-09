@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class MySelectionSort 
 {
     int minIndex = 0;
-    public IIndexableList<int> SortedLinkedList(IIndexableList<int> list)
+    public IIndexableList<int> SelectionSort(IIndexableList<int> list)
     {
         for (int i = 0; i < list.Count; i++)
         {
