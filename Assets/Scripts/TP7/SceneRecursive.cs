@@ -62,8 +62,7 @@ public class SceneRecursive : MonoBehaviour
 
     public void UsePalindrome()
     {
-        text.text = " ";
-        text.text += recursion.Palindrome(inputField.text);
+        text.text = recursion.Palindrome(inputField.text).ToString();
     }
 
     public void UseSum()

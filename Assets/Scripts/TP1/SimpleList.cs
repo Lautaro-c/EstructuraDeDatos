@@ -66,9 +66,12 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
 
     public void Clear()
     {
-        for (int i = 0; i < genericArray.Length; i++)
+        if(count > 0)
         {
-            Remove(genericArray[i]);
+            for (int i = 0; i < genericArray.Length; i++)
+            {
+                Remove(genericArray[i]);
+            }
         }
     }
 

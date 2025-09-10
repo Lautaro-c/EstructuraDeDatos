@@ -12,15 +12,13 @@ public class PlayerShop : MonoBehaviour
 
     [SerializeField] ItemListSO allItems;
     private SimpleList<GameObject> playerItems;
-    private Dictionary<GameObject, int> itemQuantities;
-    private Dictionary<int, int> itemQuantities2;
+    private Dictionary<int, int> itemQuantities;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] private TextMeshProUGUI moneyText;
 
     void Start()
     {
-        itemQuantities = new Dictionary<GameObject, int>();
-        itemQuantities2 = new Dictionary<int, int>();
+        itemQuantities = new Dictionary<int, int>();
         playerItems = new SimpleList<GameObject>();
         moneyText.text = "Money: " + money.ToString();
         for (int i = 0; i < allItems.items.Length; i++)
@@ -29,7 +27,7 @@ public class PlayerShop : MonoBehaviour
             ItemSO item = allItems.items[i];
             newItem.GetComponent<Image>().sprite = item.Sprite;
             Transform nameTextTransform = newItem.transform.Find("NameText");
-            itemQuantities2.Add(item.ID, 0);
+            itemQuantities.Add(item.ID, 0);
 
             if (nameTextTransform != null)
             {
@@ -54,7 +52,7 @@ public class PlayerShop : MonoBehaviour
                 TextMeshProUGUI texto = amountTextTransform.GetComponent<TextMeshProUGUI>();
                 if (texto != null)
                 {
-                    texto.text = "Amount: " + itemQuantities2[i].ToString();
+                    texto.text = "Amount: " + itemQuantities[i].ToString();
                 }
             }
             GameObject instantiatedItem = Instantiate(newItem, transform);
@@ -73,7 +71,7 @@ public class PlayerShop : MonoBehaviour
             if(itemSO1 != null)
             {
                 Debug.Log("Compre: " +  itemSO1.name);
-                itemQuantities2[itemSO.ID] += 1;
+                itemQuantities[itemSO.ID] += 1;
                 //itemQuantities[itemSO.ID] +=1;
                 money -= itemSO.ItemPrice;
                 UpdateUI();
@@ -87,7 +85,7 @@ public class PlayerShop : MonoBehaviour
         if(item != null)
         {
             money += item.ItemPrice;
-            itemQuantities2[item.ID] -= 1;
+            itemQuantities[item.ID] -= 1;
             UpdateUI();
         }
     }
@@ -101,7 +99,7 @@ public class PlayerShop : MonoBehaviour
             }
         }*/
         moneyText.text = "Money: " + money.ToString();
-        foreach (var kvp in itemQuantities2)
+        foreach (var kvp in itemQuantities)
         {
             if (kvp.Value > 0)
             {
@@ -113,7 +111,7 @@ public class PlayerShop : MonoBehaviour
                     TextMeshProUGUI texto = amountTextTransform.GetComponent<TextMeshProUGUI>();
                     if (texto != null)
                     {
-                        texto.text = "Amount: " + itemQuantities2[kvp.Key].ToString();
+                        texto.text = "Amount: " + itemQuantities[kvp.Key].ToString();
                     }
                 }
             }

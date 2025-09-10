@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,13 +18,13 @@ public class ShopUI : MonoBehaviour
     [SerializeField] private PlayerShop playerShop;
     [SerializeField] GameObject itemPrefab;
     SimpleList<ItemSO> itemList = new SimpleList<ItemSO>();
+    private SimpleList<GameObject> childrenList;
 
     void Start()
     {
-        // Convertimos el array a SimpleList
+        childrenList = new SimpleList<GameObject>();
         itemList.AddRange(allItems.items);
 
-        // Ordenamos según el criterio
         ItemSOSorter sorter = new ItemSOSorter();
         IIndexableList<ItemSO> sortedItems = ApplySort(itemList, SortCriteria.ID);
 
@@ -31,27 +32,26 @@ public class ShopUI : MonoBehaviour
         for (int i = 0; i < sortedItems.Count; i++)
         {
             ItemSO item = sortedItems[i];
-            GameObject newItem = itemPrefab;
+            GameObject instantiatedItem = Instantiate(itemPrefab, transform);
+            instantiatedItem.GetComponent<Image>().sprite = item.Sprite;
 
-            newItem.GetComponent<Image>().sprite = item.Sprite;
-
-            Transform nameText = newItem.transform.Find("NameText");
+            Transform nameText = instantiatedItem.transform.Find("NameText");
             if (nameText != null)
             {
                 TextMeshProUGUI texto = nameText.GetComponent<TextMeshProUGUI>();
                 if (texto != null) texto.text = item.ItemName;
             }
 
-            Transform priceText = newItem.transform.Find("PriceText");
+            Transform priceText = instantiatedItem.transform.Find("PriceText");
             if (priceText != null)
             {
                 TextMeshProUGUI texto = priceText.GetComponent<TextMeshProUGUI>();
                 if (texto != null) texto.text = "$" + item.ItemPrice.ToString();
             }
 
-            GameObject instantiatedItem = Instantiate(newItem, transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
             instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
+            childrenList.Add(instantiatedItem);
         }
     }
 
@@ -80,7 +80,16 @@ public class ShopUI : MonoBehaviour
         SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Name);
         for (int i = 0; i < tempList.Count; i++)
         {
-            Debug.Log(tempList[i].ItemName);
+            for (int j = 0; j < childrenList.Count; j++)
+            {
+                if (childrenList[j].transform.Find("NameText").GetComponent<TextMeshProUGUI>().text == tempList[i].name)
+                {
+                    Debug.Log("Hubo una coincidencia en nombres el objeto: " + j + "Con la posicion: " + i);
+                    childrenList[i].transform.SetSiblingIndex(i);
+                    Canvas.ForceUpdateCanvases();
+                    break;
+                }
+            }
         }
         itemList = tempList;
     }
@@ -89,7 +98,11 @@ public class ShopUI : MonoBehaviour
         SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Price);
         for (int i = 0; i < tempList.Count; i++)
         {
-            Debug.Log(tempList[i].ItemName);
+            if (childrenList[i].transform.Find("PriceText").GetComponent<TextMeshProUGUI>().text == "$" + tempList[i].ItemPrice.ToString())
+            {
+                Debug.Log("Hubo una coincidencia en precios");
+                transform.GetChild(i).SetSiblingIndex(i);
+            }
         }
         itemList = tempList;
     }
@@ -105,47 +118,4 @@ public class ShopUI : MonoBehaviour
     }
 
 }
-/*
-public class ShopUI : MonoBehaviour
-{
-    [SerializeField] ItemListSO allItems;
-    [SerializeField] private PlayerShop playerShop;
-    [SerializeField] GameObject itemPrefab;
-    [SerializeField] private SimpleList<ItemSO> itemList;
-    private ItemSOSorter sorter;
-    void Start()
-    {  
-        sorter = new ItemSOSorter();
-        for (int i = 0; i < allItems.items.Length; i++)
-        {
-            itemList.Add(allItems.items[i]);
-            GameObject newItem = itemPrefab;
-            ItemSO item = allItems.items[i];
-            newItem.GetComponent<Image>().sprite = item.Sprite;
-            Transform hijo = newItem.transform.Find("NameText");
-
-            if (hijo != null)
-            {
-                TextMeshProUGUI texto = hijo.GetComponent<TextMeshProUGUI>();
-                if (texto != null)
-                {
-                    texto.text = allItems.items[i].name;
-                }
-            }
-            Transform hijo2 = newItem.transform.Find("PriceText");
-            if (hijo != null)
-            {
-                TextMeshProUGUI texto = hijo.GetComponent<TextMeshProUGUI>();
-                if (texto != null)
-                {
-                    texto.text = "$" + allItems.items[i].ItemPrice.ToString();
-                }
-            }
-            GameObject instantiatedItem = Instantiate(newItem, transform);
-            instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
-            instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
-        }
-    }
-
-}*/
 
