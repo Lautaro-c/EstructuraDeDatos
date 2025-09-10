@@ -47,6 +47,32 @@ public class SceneRecursive : MonoBehaviour
             text.text = "Ingrese un número válido";
         }
     }
+
+    public void UsePyramid()
+    {
+        if (int.TryParse(inputField.text, out int num))
+        {
+            text.text = recursion.Pyramid(num);
+        }
+        else
+        {
+            text.text = "Ingrese un número válido";
+        }
+    }
+
+    public void UsePalindrome()
+    {
+        text.text += recursion.Palindrome(inputField.text);
+    }
+
+    public void UseSum()
+    {
+        //if (int.TryParse(inputField.text, out int[] num))
+        //{
+        //    recursion.Sum(num)
+        //}
+    }
+
     public void ClearInputF()
     {
         inputField.text = "";

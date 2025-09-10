@@ -54,7 +54,7 @@ public class Recursion : MonoBehaviour
         //caso recursivo
         return line + Pyramid(maxHeight, currentHeight + 1);
     }
-    public bool Palíndromo (string palabra)
+    public bool Palindrome (string palabra)
     {
         // Caso base
         if (palabra.Length <= 1)
@@ -65,6 +65,6 @@ public class Recursion : MonoBehaviour
             return false;
 
         // Llamada recursiva
-        else return Palíndromo(palabra.Substring(1, palabra.Length - 2));
+        else return Palindrome(palabra.Substring(1, palabra.Length - 2));
     }
 }
