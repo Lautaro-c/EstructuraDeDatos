@@ -5,11 +5,6 @@ using UnityEngine;
 public class Recursion : MonoBehaviour
 {
 
-    private void Start()
-    {
-        Debug.Log(Fibonacci(24));
-    }
-
     public int Sum(int[] nums, int currentIndex)
     {
         //caso recursivo

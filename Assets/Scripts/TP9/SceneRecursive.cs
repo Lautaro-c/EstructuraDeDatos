@@ -87,8 +87,4 @@ public class SceneRecursive : MonoBehaviour
         text.text = "La suma es: " + Suma;
     }
 
-    public void ClearInputF()
-    {
-        inputField.text = "";
-    }    
 }
