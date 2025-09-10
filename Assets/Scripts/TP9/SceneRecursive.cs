@@ -20,15 +20,14 @@ public class SceneRecursive : MonoBehaviour
     {
         if (int.TryParse(inputField.text, out int maxNum))
         {
-            text.text = "El golden ratio es de";
-            int i = 0;
-            int fib = recursion.Fibonacci(i);
-            while (fib <= maxNum)
+            string output = "";
+
+            for(int i = 0; i < maxNum; i++)
             {
-                text.text += " " + fib + ", ";
-                i++;
-                fib = recursion.Fibonacci(i);
+                output += recursion.Fibonacci(i) + " , ";
             }
+
+            text.text = "El golden ratio es de: " + output;
         }
         else
         {

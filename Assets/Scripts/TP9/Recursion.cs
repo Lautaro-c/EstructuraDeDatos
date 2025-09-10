@@ -6,6 +6,11 @@ public class Recursion : MonoBehaviour
 {
     private int[] numsArray;
 
+    private void Start()
+    {
+        Debug.Log(Fibonacci(24));
+    }
+
     public int Sum(int[] nums, int currentIndex)
     {
         //caso recursivo
@@ -24,7 +29,7 @@ public class Recursion : MonoBehaviour
         if (num == 1) return 1;
 
         //caso recursivo
-        return Fibonacci(num - 1) + Fibonacci(num - 2);
+        else return Fibonacci(num - 1) + Fibonacci(num - 2);
     }
 
     public int Factorial(int num)
