@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Recursion : MonoBehaviour
 {
-    private int[] numsArray;
 
     private void Start()
     {
@@ -14,7 +13,7 @@ public class Recursion : MonoBehaviour
     public int Sum(int[] nums, int currentIndex)
     {
         //caso recursivo
-        if (currentIndex < numsArray.Length - 1)
+        if (currentIndex < nums.Length - 1)
         {
             return nums[currentIndex] + Sum(nums, currentIndex + 1);
         }

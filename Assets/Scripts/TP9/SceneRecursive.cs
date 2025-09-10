@@ -62,15 +62,29 @@ public class SceneRecursive : MonoBehaviour
 
     public void UsePalindrome()
     {
+        text.text = " ";
         text.text += recursion.Palindrome(inputField.text);
     }
 
     public void UseSum()
     {
-        //if (int.TryParse(inputField.text, out int[] num))
-        //{
-        //    recursion.Sum(num)
-        //}
+        string numsInput = inputField.text;
+        string[] separateNums = numsInput.Split(',', ' ');
+        int[] finalNums = new int[separateNums.Length];
+
+        for(int i = 0; i < finalNums.Length; i++)
+        {
+            if (int.TryParse(separateNums[i], out int value))
+            {
+                finalNums[i] = value;
+            }
+            else
+            {
+                finalNums[i] = 0;
+            }
+        }
+        int Suma = recursion.Sum(finalNums, 0);
+        text.text = "La suma es: " + Suma;
     }
 
     public void ClearInputF()
