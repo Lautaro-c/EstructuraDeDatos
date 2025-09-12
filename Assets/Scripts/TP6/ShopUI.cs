@@ -48,6 +48,12 @@ public class ShopUI : MonoBehaviour
                 TextMeshProUGUI texto = priceText.GetComponent<TextMeshProUGUI>();
                 if (texto != null) texto.text = "$" + item.ItemPrice.ToString();
             }
+            Transform rarityText = instantiatedItem.transform.Find("RarityText");
+            if (rarityText != null)
+            {
+                TextMeshProUGUI texto = rarityText.GetComponent<TextMeshProUGUI>();
+                if (texto != null) texto.text = item.Rareza.ToString();
+            }
 
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
             instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
@@ -84,8 +90,7 @@ public class ShopUI : MonoBehaviour
             {
                 if (childrenList[j].transform.Find("NameText").GetComponent<TextMeshProUGUI>().text == tempList[i].name)
                 {
-                    Debug.Log("Hubo una coincidencia en nombres el objeto: " + j + "Con la posicion: " + i);
-                    childrenList[i].transform.SetSiblingIndex(i);
+                    childrenList[j].transform.SetSiblingIndex(i);
                     Canvas.ForceUpdateCanvases();
                     break;
                 }
@@ -98,10 +103,14 @@ public class ShopUI : MonoBehaviour
         SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Price);
         for (int i = 0; i < tempList.Count; i++)
         {
-            if (childrenList[i].transform.Find("PriceText").GetComponent<TextMeshProUGUI>().text == "$" + tempList[i].ItemPrice.ToString())
+            for (int j = 0; j < childrenList.Count; j++)
             {
-                Debug.Log("Hubo una coincidencia en precios");
-                transform.GetChild(i).SetSiblingIndex(i);
+                if (childrenList[j].transform.Find("PriceText").GetComponent<TextMeshProUGUI>().text == "$" + tempList[i].ItemPrice.ToString())
+                {
+                    childrenList[j].transform.SetSiblingIndex(i);
+                    Canvas.ForceUpdateCanvases();
+                    break;
+                }
             }
         }
         itemList = tempList;
@@ -112,7 +121,16 @@ public class ShopUI : MonoBehaviour
         SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Rarity);
         for (int i = 0; i < tempList.Count; i++)
         {
-            Debug.Log(tempList[i].ItemName);
+            for (int j = 0; j < childrenList.Count; j++)
+            {
+                if (childrenList[j].transform.Find("RarityText").GetComponent<TextMeshProUGUI>().text == tempList[i].Rareza.ToString())
+                {
+                    Debug.Log("Hubo coincidencia");
+                    childrenList[j].transform.SetSiblingIndex(i);
+                    Canvas.ForceUpdateCanvases();
+                    break;
+                }
+            }
         }
         itemList = tempList;
     }
