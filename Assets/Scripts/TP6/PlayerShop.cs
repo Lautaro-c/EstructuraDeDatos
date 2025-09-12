@@ -15,12 +15,16 @@ public class PlayerShop : MonoBehaviour
     private Dictionary<int, int> itemQuantities;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] private TextMeshProUGUI moneyText;
+    SimpleList<ItemSO> itemList = new SimpleList<ItemSO>();
+    private ItemSOSorter sorter;
 
     void Start()
     {
+        sorter = new ItemSOSorter();
         itemQuantities = new Dictionary<int, int>();
         playerItems = new SimpleList<GameObject>();
         moneyText.text = "Money: " + money.ToString();
+        itemList.AddRange(allItems.items);
         for (int i = 0; i < allItems.items.Length; i++)
         {
             GameObject newItem = itemPrefab;
@@ -54,6 +58,12 @@ public class PlayerShop : MonoBehaviour
                 {
                     texto.text = "Amount: " + itemQuantities[i].ToString();
                 }
+            }
+            Transform rarityText = newItem.transform.Find("RarityText");
+            if (rarityText != null)
+            {
+                TextMeshProUGUI texto = rarityText.GetComponent<TextMeshProUGUI>();
+                if (texto != null) texto.text = item.Rareza.ToString();
             }
             GameObject instantiatedItem = Instantiate(newItem, transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
@@ -90,14 +100,7 @@ public class PlayerShop : MonoBehaviour
         }
     }
     private void UpdateUI()
-    { /*
-        foreach (var kvp in itemQuantities)
-        {
-            if(kvp.Value > 0)
-            {
-                allItems.items[kvp.Key].gameObject.SetActive(true);
-            }
-        }*/
+    {
         moneyText.text = "Money: " + money.ToString();
         foreach (var kvp in itemQuantities)
         {
@@ -121,5 +124,79 @@ public class PlayerShop : MonoBehaviour
             }
             
         }
+    }
+
+    private IIndexableList<ItemSO> ApplySort(IIndexableList<ItemSO> list, SortCriteria criterio)
+    {
+        ItemSOSorter sorter = new ItemSOSorter();
+        switch (criterio)
+        {
+            case SortCriteria.ID:
+                return sorter.SortBy(list, item => item.ID);
+            case SortCriteria.Name:
+                return sorter.SortBy(list, item => item.ItemName);
+            case SortCriteria.Price:
+                return sorter.SortBy(list, item => item.ItemPrice);
+            case SortCriteria.Rarity:
+                return sorter.SortBy(list, item => item.Rareza);
+            case SortCriteria.Tipe:
+                return sorter.SortBy(list, item => item.Tipo);
+            default:
+                return list;
+        }
+    }
+
+    public void SortByName()
+    {
+        SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Name);
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            for (int j = 0; j < playerItems.Count; j++)
+            {
+                if (playerItems[j].transform.Find("NameText").GetComponent<TextMeshProUGUI>().text == tempList[i].name)
+                {
+                    playerItems[j].transform.SetSiblingIndex(i);
+                    Canvas.ForceUpdateCanvases();
+                    break;
+                }
+            }
+        }
+        itemList = tempList;
+    }
+    public void SortByPrice()
+    {
+        SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Price);
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            for (int j = 0; j < playerItems.Count; j++)
+            {
+                if (playerItems[j].transform.Find("PriceText").GetComponent<TextMeshProUGUI>().text == "$" + tempList[i].ItemPrice.ToString())
+                {
+                    playerItems[j].transform.SetSiblingIndex(i);
+                    Canvas.ForceUpdateCanvases();
+                    break;
+                }
+            }
+        }
+        itemList = tempList;
+    }
+
+    public void SortByRarity()
+    {
+        SimpleList<ItemSO> tempList = (SimpleList<ItemSO>)ApplySort(itemList, SortCriteria.Rarity);
+        for (int i = 0; i < tempList.Count; i++)
+        {
+            for (int j = 0; j < playerItems.Count; j++)
+            {
+                if (playerItems[j].transform.Find("RarityText").GetComponent<TextMeshProUGUI>().text == tempList[i].Rareza.ToString())
+                {
+                    Debug.Log("Hubo coincidencia");
+                    playerItems[j].transform.SetSiblingIndex(i);
+                    Canvas.ForceUpdateCanvases();
+                    break;
+                }
+            }
+        }
+        itemList = tempList;
     }
 }
