@@ -152,6 +152,7 @@ MonoBehaviour:
   allItems: {fileID: 11400000, guid: c56f1a81859377c4cac0098995bcaf2a, type: 2}
   itemPrefab: {fileID: 3757551258451023926, guid: 18748085efad38f4bbd4024f48e4bc2f, type: 3}
   moneyText: {fileID: 0}
+  shopUI: {fileID: 0}
 --- !u!4 &30106622
 Transform:
   m_ObjectHideFlags: 0
@@ -197,6 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopItems: {fileID: 11400000, guid: c56f1a81859377c4cac0098995bcaf2a, type: 2}
+  shopUI: {fileID: 1512938080}
 --- !u!4 &67009945
 Transform:
   m_ObjectHideFlags: 0
@@ -1284,6 +1286,7 @@ MonoBehaviour:
   allItems: {fileID: 11400000, guid: c56f1a81859377c4cac0098995bcaf2a, type: 2}
   itemPrefab: {fileID: 572113948492072805, guid: 061830d792108c342a0d096991320cb6, type: 3}
   moneyText: {fileID: 1029897269}
+  shopUI: {fileID: 1512938080}
 --- !u!114 &1093435068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1474,7 +1477,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 100, y: 100}
-  m_Spacing: {x: 275.76, y: 60}
+  m_Spacing: {x: 369.12, y: 60}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &1512938080
@@ -1491,7 +1494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allItems: {fileID: 11400000, guid: c56f1a81859377c4cac0098995bcaf2a, type: 2}
   playerShop: {fileID: 1093435067}
-  itemPrefab: {fileID: 3757551258451023926, guid: 18748085efad38f4bbd4024f48e4bc2f, type: 3}
+  itemPrefab: {fileID: 572113948492072805, guid: 061830d792108c342a0d096991320cb6, type: 3}
 --- !u!1 &1630665569
 GameObject:
   m_ObjectHideFlags: 0

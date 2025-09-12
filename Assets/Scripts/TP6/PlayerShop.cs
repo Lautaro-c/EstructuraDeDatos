@@ -17,6 +17,7 @@ public class PlayerShop : MonoBehaviour
     [SerializeField] private TextMeshProUGUI moneyText;
     SimpleList<ItemSO> itemList = new SimpleList<ItemSO>();
     private ItemSOSorter sorter;
+    [SerializeField] private ShopUI shopUI;
 
     void Start()
     {
@@ -68,6 +69,7 @@ public class PlayerShop : MonoBehaviour
             GameObject instantiatedItem = Instantiate(newItem, transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
             instantiatedItem.GetComponent<Button>().onClick.AddListener(() => RemoveItem(item));
+            instantiatedItem.GetComponent<Button>().onClick.AddListener(() => shopUI.AddItem(item));
             instantiatedItem.SetActive(false);
             playerItems.Add(instantiatedItem);
         }
@@ -82,7 +84,6 @@ public class PlayerShop : MonoBehaviour
             {
                 Debug.Log("Compre: " +  itemSO1.name);
                 itemQuantities[itemSO.ID] += 1;
-                //itemQuantities[itemSO.ID] +=1;
                 money -= itemSO.ItemPrice;
                 UpdateUI();
                 Debug.Log(money.ToString());
@@ -121,14 +122,12 @@ public class PlayerShop : MonoBehaviour
             else
             {
                 playerItems[kvp.Key].gameObject.SetActive(false);
-            }
-            
+            }      
         }
     }
 
     private IIndexableList<ItemSO> ApplySort(IIndexableList<ItemSO> list, SortCriteria criterio)
     {
-        ItemSOSorter sorter = new ItemSOSorter();
         switch (criterio)
         {
             case SortCriteria.ID:

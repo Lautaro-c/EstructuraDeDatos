@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,11 +21,13 @@ public class ShopUI : MonoBehaviour
     [SerializeField] GameObject itemPrefab;
     SimpleList<ItemSO> itemList = new SimpleList<ItemSO>();
     private SimpleList<GameObject> childrenList;
+    private Dictionary<int, int> itemQuantities;
 
     void Start()
     {
         childrenList = new SimpleList<GameObject>();
         itemList.AddRange(allItems.items);
+        itemQuantities = new Dictionary<int, int>();
 
         ItemSOSorter sorter = new ItemSOSorter();
         IIndexableList<ItemSO> sortedItems = ApplySort(itemList, SortCriteria.ID);
@@ -34,6 +38,7 @@ public class ShopUI : MonoBehaviour
             ItemSO item = sortedItems[i];
             GameObject instantiatedItem = Instantiate(itemPrefab, transform);
             instantiatedItem.GetComponent<Image>().sprite = item.Sprite;
+            itemQuantities.Add(item.ID, 10);
 
             Transform nameText = instantiatedItem.transform.Find("NameText");
             if (nameText != null)
@@ -54,10 +59,62 @@ public class ShopUI : MonoBehaviour
                 TextMeshProUGUI texto = rarityText.GetComponent<TextMeshProUGUI>();
                 if (texto != null) texto.text = item.Rareza.ToString();
             }
+            Transform amountTextTransform = instantiatedItem.transform.Find("AmountText");
+            if (amountTextTransform != null)
+            {
+                TextMeshProUGUI texto = amountTextTransform.GetComponent<TextMeshProUGUI>();
+                if (texto != null)
+                {
+                    texto.text = "Amount: " + itemQuantities[i].ToString();
+                }
+            }
 
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
             instantiatedItem.GetComponent<Button>().onClick.AddListener(() => playerShop.BuyItem(item));
             childrenList.Add(instantiatedItem);
+        }
+    }
+
+    public void RemoveItem(ItemSO item)
+    {
+        if (item != null && itemQuantities[item.ID] >  0)
+        {
+            itemQuantities[item.ID] -= 1;
+            UpdateUI();
+        }
+    }
+
+    public void AddItem(ItemSO item)
+    {
+        if (item != null)
+        {
+            itemQuantities[item.ID] += 1;
+            UpdateUI();
+        }
+    }
+
+    private void UpdateUI()
+    {
+        foreach (var kvp in itemQuantities)
+        {
+            if (kvp.Value > 0)
+            {
+                Debug.Log("Pasamos el if");
+                childrenList[kvp.Key].gameObject.SetActive(true);
+                Transform amountTextTransform = childrenList[kvp.Key].transform.Find("AmountText");
+                if (amountTextTransform != null)
+                {
+                    TextMeshProUGUI texto = amountTextTransform.GetComponent<TextMeshProUGUI>();
+                    if (texto != null)
+                    {
+                        texto.text = "Amount: " + itemQuantities[kvp.Key].ToString();
+                    }
+                }
+            }
+            else
+            {
+                childrenList[kvp.Key].gameObject.SetActive(false);
+            }
         }
     }
 

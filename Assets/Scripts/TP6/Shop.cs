@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     //ID, Cantidad
     Dictionary<int, ItemSO> itemStock;
     [SerializeField] ItemListSO shopItems;
+    [SerializeField] private ShopUI shopUI;
 
     void Start()
     {
@@ -26,7 +27,8 @@ public class Shop : MonoBehaviour
         {
             return null;
         }
-        ItemSO item = itemStock[itemId]; 
+        ItemSO item = itemStock[itemId];
+        shopUI.RemoveItem(item);
         return item;
     }
 
