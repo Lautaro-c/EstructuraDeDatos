@@ -77,7 +77,7 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
 
     public bool Remove(T item)
     {
-        for (int i = 0; i < genericArray.Length; i++)
+        for (int i = 0; i < count; i++)
         {
             if (genericArray[i].Equals(item))
             {
@@ -91,7 +91,6 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
                 return true;
             }
         }
-
         return false;
     }
 

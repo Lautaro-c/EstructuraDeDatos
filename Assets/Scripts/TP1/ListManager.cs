@@ -10,7 +10,7 @@ public class ListManager : MonoBehaviour
     private SimpleList<int> list;
     private int secondsToDeactivate = 2;
     [SerializeField] private TextMeshProUGUI countText;
-    [SerializeField] private TextMeshProUGUI lastNumText;
+    [SerializeField] private TextMeshProUGUI listText;
     [SerializeField] private TextMeshProUGUI actualValueText;
     [SerializeField] private TMP_InputField addInputField;
     [SerializeField] private TMP_InputField removeInputField;
@@ -28,7 +28,7 @@ public class ListManager : MonoBehaviour
     private void Update()
     {
         countText.text = "Count: " + list.Count.ToString();
-        UpdateLastNumText();
+        UpdateListText();
     }
 
     public void AddNumber()
@@ -60,14 +60,19 @@ public class ListManager : MonoBehaviour
         list.AddRange(partsNumbers);
     }
 
-    public void UpdateLastNumText()
+    public void UpdateListText()
     {
         if (list.Count > 0)
         {
-            lastNumText.text = "Last number added: " + list[list.Count - 1].ToString();
+            string fullList = "";
+            for (int i = 0; i < list.Count; i++)
+            {
+                fullList += list[i].ToString() + " - ";
+            }
+            listText.text = "The full list is: " + fullList;
         }else
         {
-            lastNumText.text = "Last number added: ";
+            listText.text = "The full list is: ";
         }
     }
 

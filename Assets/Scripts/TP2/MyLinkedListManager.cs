@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,7 +10,7 @@ public class MyLinkedListManager : MonoBehaviour
     private MyLinkedList<int> linkedList;
     private int secondsToDeactivate = 2;
     [SerializeField] private TextMeshProUGUI countText;
-    [SerializeField] private TextMeshProUGUI lastNumText;
+    [SerializeField] private TextMeshProUGUI listText;
     [SerializeField] private TextMeshProUGUI actualValueText;
     [SerializeField] private TextMeshProUGUI emptyText;
     [SerializeField] private TMP_InputField addInputField;
@@ -29,7 +30,7 @@ public class MyLinkedListManager : MonoBehaviour
     {
         countText.text = "Count: " + linkedList.Count.ToString();
         emptyText.text = "IsEmpty: " + linkedList.IsEmpty();
-        UpdateLastNumText();
+        UpdateListText();
     }
 
     public void AddNumber()
@@ -60,15 +61,20 @@ public class MyLinkedListManager : MonoBehaviour
         linkedList.AddRange(partsNumbers);
     }
 
-    public void UpdateLastNumText()
+    public void UpdateListText()
     {
         if (linkedList.Count > 0)
         {
-            lastNumText.text = "Last number added: " + linkedList[linkedList.Count - 1].ToString();
+            string fullList = "";
+            for (int i = 0; i < linkedList.Count; i++)
+            {
+                fullList += linkedList[i].ToString() + " - ";
+            }
+            listText.text = "The full list is: " + fullList;
         }
         else
         {
-            lastNumText.text = "Last number added: ";
+            listText.text = "The full list is: ";
         }
     }
 

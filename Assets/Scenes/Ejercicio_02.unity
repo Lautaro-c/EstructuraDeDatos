@@ -530,7 +530,7 @@ GameObject:
   - component: {fileID: 196583228}
   - component: {fileID: 196583227}
   m_Layer: 5
-  m_Name: LastNumText
+  m_Name: ListText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1778,6 +1778,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1758415126}
         m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
         m_MethodName: ChangeValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1758415126}
+        m_TargetAssemblyTypeName: MyLinkedListManager, Assembly-CSharp
+        m_MethodName: ShowNumValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4766,7 +4778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countText: {fileID: 47914337}
-  lastNumText: {fileID: 196583227}
+  listText: {fileID: 196583227}
   actualValueText: {fileID: 578594601}
   emptyText: {fileID: 199593279}
   addInputField: {fileID: 320145636}
