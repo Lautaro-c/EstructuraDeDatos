@@ -94,14 +94,4 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
         return false;
     }
 
-    public void RemoveAt(int index)
-    {
-        for (int j = index; j < genericArray.Length - 1; j++)
-        {
-            genericArray[j] = genericArray[j + 1];
-        }
-        genericArray[count - 1] = default(T);
-        count--;
-    } 
-
 }

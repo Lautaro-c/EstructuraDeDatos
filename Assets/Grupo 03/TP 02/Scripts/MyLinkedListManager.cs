@@ -13,11 +13,9 @@ public class MyLinkedListManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI listText;
     [SerializeField] private TextMeshProUGUI actualValueText;
     [SerializeField] private TextMeshProUGUI emptyText;
-    [SerializeField] private TMP_InputField addInputField;
-    [SerializeField] private TMP_InputField removeInputField;
+    [SerializeField] private TMP_InputField GeneralInputField;
     [SerializeField] private TMP_InputField numIDInputField;
     [SerializeField] private TMP_InputField newNumInputField;
-    [SerializeField] private TMP_InputField numRangeInputField;
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
@@ -35,7 +33,7 @@ public class MyLinkedListManager : MonoBehaviour
 
     public void AddNumber()
     {
-        if (int.TryParse(addInputField.text, out int result))
+        if (int.TryParse(GeneralInputField.text, out int result))
         {
             linkedList.Add((int)result); // Explicitly cast to resolve ambiguity  
             Debug.Log("Número ingresado: " + result);
@@ -48,7 +46,7 @@ public class MyLinkedListManager : MonoBehaviour
 
     public void AddNumbersRange()
     {
-        string input = numRangeInputField.text;
+        string input = GeneralInputField.text;
         string[] parts = input.Split(',');
         int[] partsNumbers = new int[parts.Length];
         for (int i = 0; i < parts.Length; i++)
@@ -85,7 +83,7 @@ public class MyLinkedListManager : MonoBehaviour
 
     public void RemoveNumber()
     {
-        if (int.TryParse(removeInputField.text, out int result))
+        if (int.TryParse(GeneralInputField.text, out int result))
         {
             if (linkedList.Remove(result))
             {
@@ -132,5 +130,25 @@ public class MyLinkedListManager : MonoBehaviour
     {
         tickSign.SetActive(false);
         crossSing.SetActive(false);
+    }
+    public void RemoveAtIndex()
+    {
+        if (int.TryParse(GeneralInputField.text, out int index))
+        {
+            if (linkedList.RemoveAt(index))
+            {
+                Debug.Log("Número borrado: " + index);
+                tickSign.SetActive(true);
+            }
+            else
+            {
+                crossSing.SetActive(true);
+            }
+            Invoke("DeactivateSigns", secondsToDeactivate);
+        }
+        else
+        {
+            Debug.LogWarning("No se ingresó un número válido.");
+        }
     }
 }
