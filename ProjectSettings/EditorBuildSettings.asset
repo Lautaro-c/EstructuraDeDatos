@@ -8,5 +8,26 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ejercicio_01.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Ejercicio_02.unity
+    guid: 840a32a7e347c0346910f10c03849336
+  - enabled: 1
+    path: Assets/Scenes/Ejercicio_03.unity
+    guid: 84bc84cfd4e7c1f4b9ae32dd1edec933
+  - enabled: 1
+    path: Assets/Scenes/Ejercicio_04.unity
+    guid: 6e99662aeae8ffc439644b7138a346b9
+  - enabled: 1
+    path: Assets/Scenes/Ejercicio_05.unity
+    guid: 981eaa0d52acb3e42b244321259b86b7
+  - enabled: 1
+    path: Assets/Scenes/Ejercicio_06.unity
+    guid: 2e8dbd3d819827b49bbf3312b04f6d01
+  - enabled: 1
+    path: Assets/Scenes/Ejercicio_09.unity
+    guid: 55187ec6e50aad646902058b7168b96f
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 965624f7679a3cc43938ba39920225e2
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
