@@ -13,6 +13,12 @@ public class PlayerMovement : MonoBehaviour
     public bool Collided => collided;
 
     public GameObject specificShadow;
+
+    public bool DoorStarted = false;
+
+    private float secondCounter = 0f;
+    private float maxTime = 3f;
+    private bool startTimer = false;
     void Start()
     {
         shadow = FindAnyObjectByType<ShadowManager>();
@@ -26,17 +32,21 @@ public class PlayerMovement : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector2.right * horizontalInput * speed * Time.deltaTime);
 
-        if (horizontalInput != 0 && collided == false) 
+        if (horizontalInput != 0 && collided == false && DoorStarted)
         {
             shadow.MovementEnqueue();
             //Debug.Log("Enqueue");
         }
-        /*if(collided)
+        if (startTimer)
         {
-            shadow.ShadowDequeue();
-        }*/
-    }
+            secondCounter += Time.deltaTime;
+            if (secondCounter >= maxTime && DoorStarted)
+            {
+                shadow.ShadowDequeue();
+            }
+        }
 
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision != null)
@@ -46,6 +56,14 @@ public class PlayerMovement : MonoBehaviour
                 collided = true;
                 Debug.Log("collided true");
             }
+            if (collision.CompareTag("DoorStart"))
+            {
+                startTimer = true;
+                DoorStarted = true;
+
+            }
         }
     }
 }
+
+

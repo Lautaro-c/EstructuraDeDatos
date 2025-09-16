@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class ShadowManager : MonoBehaviour 
+public class ShadowManager : MonoBehaviour
 {
     [SerializeField] private GameObject shadow;
     private MyQueue<float> queue;
@@ -12,7 +12,6 @@ public class ShadowManager : MonoBehaviour
     private PlayerMovement playerMovement;
     private bool MovementStarted = false;
     private Stopwatch stopwatch;
-    private int timeToStart = 4;
     private void Start()
     {
         queue = new MyQueue<float>();
@@ -23,12 +22,11 @@ public class ShadowManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (stopwatch.Elapsed.TotalSeconds > timeToStart)
-        {
-            ShadowDequeue();
-        }
+        //if (stopwatch.Elapsed.TotalSeconds > timeToStart)
+        //{
+        //    ShadowDequeue();
+        //}
     }
-
     public void MovementEnqueue()
     {
         queue.Enqueue(playerMovement.HorizontalInput);
@@ -37,8 +35,9 @@ public class ShadowManager : MonoBehaviour
     {
         if (playerMovement.specificShadow != null)
         {
-            if (MovementStarted == false)
+            if (MovementStarted == false && playerMovement.DoorStarted)
             {
+                print("debug");
                 playerMovement.specificShadow.SetActive(true);
                 MovementStarted = true;
             }
