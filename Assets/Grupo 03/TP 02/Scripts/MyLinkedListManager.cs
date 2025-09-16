@@ -60,12 +60,8 @@ public class MyLinkedListManager : MonoBehaviour
     {
         if (linkedList.Count > 0)
         {
-            string fullList = "";
-            for (int i = 0; i < linkedList.Count; i++)
-            {
-                fullList += linkedList[i].ToString() + " - ";
-            }
-            listText.text = "The full list is: " + fullList;
+
+            listText.text = "The full list is: " + linkedList.ToString();
         }
         else
         {

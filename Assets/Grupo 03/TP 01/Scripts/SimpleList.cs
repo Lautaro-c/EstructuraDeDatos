@@ -10,6 +10,8 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
     T[] genericArray;
     const int defaultSize = 5;
     private int count = 0;
+
+    //como vas a manejar la lista
     public T this[int index]
     {
         get
@@ -21,7 +23,7 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
             genericArray[index] = value;
         }
     }
-
+    //se puede consultar cuantos elementos hay, pero no modificar ese valor directamente.
     public int Count
     {
         get
@@ -67,14 +69,7 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
     public void Clear()
     {
         if(count > 0)
-        {
-            /*int oldCount = count;
-            for (int i = 0; i < oldCount; i++)
-            {
-                Debug.Log("Count es: " + oldCount);
-                Debug.Log("I es: " + i);
-                Remove(genericArray[i]);
-            }*/
+        {  
             genericArray = new T[defaultSize];
             count = 0;
         }
@@ -97,7 +92,7 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
         }
         return false;
     }
-    //Para el stack
+    //Para el stac
     public void RemoveAt(int index)
     {
         for (int j = index; j < count; j++)
@@ -106,6 +101,20 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
         }
         genericArray[count - 1] = default(T);
         count--;
+    }
+    public override string ToString()
+    {
+        string value = "";
+        for (int i = 0; i < count; i++ )
+        {
+            value += genericArray[i].ToString();
+           
+            if (i + 1 < count)
+            {
+                value += ", ";
+            } 
+        }
+        return value;
     }
 
 }

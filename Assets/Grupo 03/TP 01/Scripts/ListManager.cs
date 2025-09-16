@@ -62,13 +62,9 @@ public class ListManager : MonoBehaviour
     {
         if (list.Count > 0)
         {
-            string fullList = "";
-            for (int i = 0; i < list.Count; i++)
-            {
-                fullList += list[i].ToString() + " - ";
-            }
-            listText.text = "The full list is: " + fullList;
-        }else
+            listText.text = "The full list is: " + list.ToString();
+        }
+        else
         {
             listText.text = "The full list is: ";
         }
