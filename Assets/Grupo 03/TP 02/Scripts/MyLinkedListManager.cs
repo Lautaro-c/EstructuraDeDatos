@@ -11,11 +11,8 @@ public class MyLinkedListManager : MonoBehaviour
     private int secondsToDeactivate = 2;
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TextMeshProUGUI listText;
-    [SerializeField] private TextMeshProUGUI actualValueText;
     [SerializeField] private TextMeshProUGUI emptyText;
     [SerializeField] private TMP_InputField GeneralInputField;
-    [SerializeField] private TMP_InputField numIDInputField;
-    [SerializeField] private TMP_InputField newNumInputField;
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
@@ -95,30 +92,6 @@ public class MyLinkedListManager : MonoBehaviour
                 crossSing.SetActive(true);
             }
             Invoke("DeactivateSigns", secondsToDeactivate);
-        }
-        else
-        {
-            Debug.LogWarning("No se ingresó un número válido.");
-        }
-    }
-
-    public void ShowNumValue()
-    {
-        if (int.TryParse(numIDInputField.text, out int result))
-        {
-            actualValueText.text = "Actual value: " + linkedList[result].ToString();
-        }
-        else
-        {
-            Debug.LogWarning("No se ingresó un número válido.");
-        }
-    }
-    
-    public void ChangeValue()
-    {
-        if (int.TryParse(numIDInputField.text, out int result) && int.TryParse(newNumInputField.text, out int result2))
-        {
-            linkedList.Insert(result, result2);
         }
         else
         {

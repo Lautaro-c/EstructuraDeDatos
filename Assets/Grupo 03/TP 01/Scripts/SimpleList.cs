@@ -68,10 +68,15 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
     {
         if(count > 0)
         {
-            for (int i = 0; i < genericArray.Length; i++)
+            /*int oldCount = count;
+            for (int i = 0; i < oldCount; i++)
             {
+                Debug.Log("Count es: " + oldCount);
+                Debug.Log("I es: " + i);
                 Remove(genericArray[i]);
-            }
+            }*/
+            genericArray = new T[defaultSize];
+            count = 0;
         }
     }
 
@@ -86,12 +91,21 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
                     genericArray[j] = genericArray[j + 1];
                 }
                 genericArray[count - 1] = default(T);
-
                 count--;
                 return true;
             }
         }
         return false;
+    }
+    //Para el stack
+    public void RemoveAt(int index)
+    {
+        for (int j = index; j < count; j++)
+        {
+            genericArray[j] = genericArray[j + 1];
+        }
+        genericArray[count - 1] = default(T);
+        count--;
     }
 
 }

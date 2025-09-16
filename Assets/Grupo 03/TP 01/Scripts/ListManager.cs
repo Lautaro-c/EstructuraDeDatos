@@ -13,10 +13,8 @@ public class ListManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI listText;
     [SerializeField] private TextMeshProUGUI actualValueText;
     [SerializeField] private TMP_InputField GeneralInputField;
-    //[SerializeField] private TMP_InputField removeInputField;
     [SerializeField] private TMP_InputField numIDInputField;
     [SerializeField] private TMP_InputField newNumInputField;
-    //[SerializeField] private TMP_InputField numRangeInputField;
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
@@ -36,7 +34,7 @@ public class ListManager : MonoBehaviour
         if (int.TryParse(GeneralInputField.text, out int result))
         {
             list.Add(result);
-            Debug.Log("Número ingresado: " + result);
+            //Debug.Log("Número ingresado: " + result);
             
         }
         else
