@@ -96,7 +96,11 @@ public class SimpleList<T> : ISimpleList<T>, IIndexableList<T>
 
     public void RemoveAt(int index)
     {
-        genericArray[index] = default(T);
+        for (int j = index; j < genericArray.Length - 1; j++)
+        {
+            genericArray[j] = genericArray[j + 1];
+        }
+        genericArray[count - 1] = default(T);
         count--;
     } 
 
