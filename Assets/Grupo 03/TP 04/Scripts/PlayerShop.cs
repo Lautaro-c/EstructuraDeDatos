@@ -9,12 +9,11 @@ public class PlayerShop : MonoBehaviour
 {
     private int money = 500;
     [SerializeField] private Shop shop;
-
     [SerializeField] ItemListSO allItems;
-    private SimpleList<GameObject> playerItems;
-    private Dictionary<int, int> itemQuantities;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] private TextMeshProUGUI moneyText;
+    private SimpleList<GameObject> playerItems;
+    private Dictionary<int, int> itemQuantities;
     SimpleList<ItemSO> itemList = new SimpleList<ItemSO>();
     private ItemSOSorter sorter;
     [SerializeField] private ShopUI shopUI;
