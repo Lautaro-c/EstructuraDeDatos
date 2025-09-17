@@ -170,15 +170,6 @@ public class MyLinkedList<T> : IIndexableList<T>
             current = current.Next;
         }
         return value;
-    }
-
-    /*public bool TryExample(out T value)
-    {
-        if()
-        {
-            value = exampleDict[key]
-                return true;
-        }
-    }*/
+    }   
 }
 

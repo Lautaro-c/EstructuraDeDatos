@@ -11,21 +11,10 @@ public class ShadowManager : MonoBehaviour
     public float counterAmount;
     private PlayerMovement playerMovement;
     private bool MovementStarted = false;
-    private Stopwatch stopwatch;
     private void Start()
     {
         queue = new MyQueue<float>();
         playerMovement = FindAnyObjectByType<PlayerMovement>();
-        stopwatch = new Stopwatch();
-        stopwatch.Start();
-    }
-
-    private void FixedUpdate()
-    {
-        //if (stopwatch.Elapsed.TotalSeconds > timeToStart)
-        //{
-        //    ShadowDequeue();
-        //}
     }
     public void MovementEnqueue()
     {
