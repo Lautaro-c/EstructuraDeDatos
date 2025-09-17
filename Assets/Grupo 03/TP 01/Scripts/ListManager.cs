@@ -12,7 +12,7 @@ public class ListManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TextMeshProUGUI listText;
     [SerializeField] private TextMeshProUGUI actualValueText;
-    [SerializeField] private TMP_InputField GeneralInputField;
+    [SerializeField] private TMP_InputField generalInputField;
     [SerializeField] private TMP_InputField numIDInputField;
     [SerializeField] private TMP_InputField newNumInputField;
     [SerializeField] private GameObject tickSign;
@@ -31,11 +31,9 @@ public class ListManager : MonoBehaviour
 
     public void AddNumber()
     {
-        if (int.TryParse(GeneralInputField.text, out int result))
+        if (int.TryParse(generalInputField.text, out int result))
         {
-            list.Add(result);
-            //Debug.Log("Número ingresado: " + result);
-            
+            list.Add(result);    
         }
         else
         {
@@ -45,7 +43,7 @@ public class ListManager : MonoBehaviour
 
     public void AddNumbersRange()
     {
-        string input = GeneralInputField.text;
+        string input = generalInputField.text;
         string[] parts = input.Split(',');
         int[] partsNumbers = new int[parts.Length]; 
         for (int i = 0; i < parts.Length; i++)
@@ -77,7 +75,7 @@ public class ListManager : MonoBehaviour
 
     public void RemoveNumber()
     {
-        if (int.TryParse(GeneralInputField.text, out int result))
+        if (int.TryParse(generalInputField.text, out int result))
         {
             if (list.Remove(result))
             {
@@ -99,7 +97,10 @@ public class ListManager : MonoBehaviour
     {
         if (int.TryParse(numIDInputField.text, out int result))
         {
-            actualValueText.text = "Actual value: " + list[result].ToString();
+            if (list.Count - 1 >= result)
+            {
+                actualValueText.text = "Actual value: " + list[result].ToString();
+            }
         }
         else
         {

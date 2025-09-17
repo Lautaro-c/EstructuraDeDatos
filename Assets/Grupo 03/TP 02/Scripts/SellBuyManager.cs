@@ -8,16 +8,15 @@ public class SellBuyManager: MonoBehaviour
 {
     private StoreInventory storeInventory;
     private PlayerInventory playerInventory;
-
     [SerializeField] private TMP_Dropdown sellDropdown;
     [SerializeField] private TMP_Dropdown buyDropdown;
     [SerializeField] private TMP_Text itemPrice;
     [SerializeField] private TMP_Text itemSellPrice;
     [SerializeField] private TMP_Text itemName;
     [SerializeField] private TMP_Text itemSellName;
-    [SerializeField] private Sprite spritePera;
-    [SerializeField] private Sprite spriteManzana;
-    [SerializeField] private Sprite spriteTomate;
+    [SerializeField] private Sprite spritePear;
+    [SerializeField] private Sprite spriteApple;
+    [SerializeField] private Sprite spriteTomato;
     [SerializeField] private Button buyButton;
     [SerializeField] private Button sellButton;
     [SerializeField] private TMP_Text playerMoney;
@@ -30,44 +29,44 @@ public class SellBuyManager: MonoBehaviour
     }
     public void ShowItemInfo()
     {
-        string nombreItem = buyDropdown.options[buyDropdown.value].text;
-        TValue item = storeInventory.GetItemByName(nombreItem);
-        itemPrice.text = item.Precio.ToString();
-        itemName.text = item.Nombre;
+        string itemName = buyDropdown.options[buyDropdown.value].text;
+        TValue item = storeInventory.GetItemByName(itemName);
+        itemPrice.text = item.Price.ToString();
+        this.itemName.text = item.Name;
         
 
-        switch (item.Nombre)
+        switch (item.Name)
         {
-            case "Manzana":
-                buyButton.image.sprite = spriteManzana;
+            case "Apple":
+                buyButton.image.sprite = spriteApple;
                 break;
-            case "Pera":
-                buyButton.image.sprite = spritePera;
+            case "Pear":
+                buyButton.image.sprite = spritePear;
                 break;
-            case "Tomate":
-                buyButton.image.sprite = spriteTomate;
+            case "Tomato":
+                buyButton.image.sprite = spriteTomato;
                 break;
         }
     }
     public void ShowSellItemInfo()
     {
-        string nombreItem = sellDropdown.options[sellDropdown.value].text;
-        TValue item = storeInventory.GetItemByName(nombreItem);
-        int newPrice = item.Precio;
+        string itemName = sellDropdown.options[sellDropdown.value].text;
+        TValue item = storeInventory.GetItemByName(itemName);
+        int newPrice = item.Price;
         newPrice = (newPrice * 90) / 100;
         itemSellPrice.text = newPrice.ToString();
-        itemSellName.text = item.Nombre;
+        itemSellName.text = item.Name;
 
-        switch (item.Nombre)
+        switch (item.Name)
         {
-            case "Manzana":
-                sellButton.image.sprite = spriteManzana;
+            case "Apple":
+                sellButton.image.sprite = spriteApple;
                 break;
-            case "Pera":
-                sellButton.image.sprite = spritePera;
+            case "Pear":
+                sellButton.image.sprite = spritePear;
                 break;
-            case "Tomate":
-                sellButton.image.sprite = spriteTomate;
+            case "Tomato":
+                sellButton.image.sprite = spriteTomato;
                 break;
         }
         if (playerInventory.PlayerItems.ContainsKey(item.ID))
@@ -81,20 +80,20 @@ public class SellBuyManager: MonoBehaviour
     }
     public void BuyDropdown()
     {
-        string nombreItem = buyDropdown.options[buyDropdown.value].text;
-        TValue item = storeInventory.GetItemByName(nombreItem);
+        string itemName = buyDropdown.options[buyDropdown.value].text;
+        TValue item = storeInventory.GetItemByName(itemName);
         Buy(item);
     }
     public void SellDropdown()
     {
-        string nombreItem = sellDropdown.options[sellDropdown.value].text;
-        TValue item = storeInventory.GetItemByName(nombreItem);
+        string itemName = sellDropdown.options[sellDropdown.value].text;
+        TValue item = storeInventory.GetItemByName(itemName);
         Sell(item);
     }
     public void Buy(TValue item)
     {
         if (item == null) return;
-        if (playerInventory.Money >= item.Precio)
+        if (playerInventory.Money >= item.Price)
         {
             if (playerInventory.PlayerItems.ContainsKey(item.ID))
             {
@@ -104,11 +103,11 @@ public class SellBuyManager: MonoBehaviour
             {
                 playerInventory.PlayerItems[item.ID] = 1;
             }
-            playerInventory.Money -= item.Precio;
+            playerInventory.Money -= item.Price;
 
             RefreshActualMoney();
 
-            Debug.Log("Compraste un/a: " + item.Nombre + " y te queda: " + playerInventory.Money + " pesos");
+            Debug.Log("Compraste un/a: " + item.Name + " y te queda: " + playerInventory.Money + " pesos");
         }
         else
         {
@@ -123,25 +122,26 @@ public class SellBuyManager: MonoBehaviour
         {
             if (playerInventory.PlayerItems[item.ID] >= 1)
             {
-                playerInventory.Money += (item.Precio * 90) / 100;
+                playerInventory.Money += (item.Price * 90) / 100;
                 playerInventory.PlayerItems[item.ID]--;
 
                 RefreshActualMoney();
 
-                Debug.Log("Vendiste un/a: " + item.Nombre + " y ahora tenes: " + playerInventory.Money + " pesos");
+                Debug.Log("Vendiste un/a: " + item.Name + " y ahora tenes: " + playerInventory.Money + " pesos");
 
                 if (playerInventory.PlayerItems[item.ID] == 0)
                 {
-                    Debug.Log("Te quedaste sin: " + item.Nombre);
+                    Debug.Log("Te quedaste sin: " + item.Name);
                     playerInventory.PlayerItems.Remove(item.ID);
                 }
             }
         }
         else
         {
-            Debug.Log("No tenes ningun: " + item.Nombre);
+            Debug.Log("No tenes ningun: " + item.Name);
             return;
         }
+        ShowSellItemInfo();
     }
     private void RefreshActualMoney()
     {

@@ -6,20 +6,20 @@ using UnityEngine;
 public class TValue
 {
     public int ID;
-    public string Nombre;
-    public int Precio;
-    public string Rareza;
-    public string Tipo;
-    public int Cantidad;
+    public string Name;
+    public int Price;
+    public string Rarity;
+    public string Tipe;
+    public int Amount;
 
-    public TValue(int id, string nombre, int precio, string rareza, string tipo, int cantidad)
+    public TValue(int id, string name, int price, string rarity, string tipe, int amount)
     {
         ID = id;
-        Nombre = nombre;
-        Precio = precio;
-        Rareza = rareza;
-        Tipo = tipo;
-        Cantidad = cantidad;
+        Name = name;
+        Price = price;
+        Rarity = rarity;
+        Tipe = tipe;
+        Amount = amount;
     }
 }
 

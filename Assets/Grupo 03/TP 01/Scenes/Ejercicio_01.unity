@@ -4245,7 +4245,7 @@ MonoBehaviour:
   countText: {fileID: 47914337}
   listText: {fileID: 196583227}
   actualValueText: {fileID: 578594601}
-  GeneralInputField: {fileID: 280514949}
+  generalInputField: {fileID: 280514949}
   numIDInputField: {fileID: 761580361}
   newNumInputField: {fileID: 357739943}
   tickSign: {fileID: 8189813}

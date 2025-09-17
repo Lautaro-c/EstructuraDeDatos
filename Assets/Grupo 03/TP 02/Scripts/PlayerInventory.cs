@@ -19,9 +19,4 @@ public class PlayerInventory//: IComparer
     {
         Debug.Log(playerItems[1].ToString());
     }
-
-    //public int Compare(Item item1, Item item2)
-    //{
-        
-    //}
 }

@@ -2178,7 +2178,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Manzana
+  m_text: Apple
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3722,7 +3722,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Manzana
+  m_text: Apple
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4422,13 +4422,13 @@ MonoBehaviour:
   m_MultiSelect: 0
   m_Options:
     m_Options:
-    - m_Text: Manzana
+    - m_Text: Apple
       m_Image: {fileID: 0}
       m_Color: {r: 0.7735849, g: 0.2787825, b: 0.2787825, a: 1}
-    - m_Text: Tomate
+    - m_Text: Tomato
       m_Image: {fileID: 0}
       m_Color: {r: 0.690566, g: 0.19674617, b: 0.19674617, a: 1}
-    - m_Text: Pera
+    - m_Text: Pear
       m_Image: {fileID: 0}
       m_Color: {r: 0.64858407, g: 0.86415094, b: 0.32446414, a: 1}
   m_OnValueChanged:
@@ -5829,9 +5829,9 @@ MonoBehaviour:
   itemSellPrice: {fileID: 2116937192}
   itemName: {fileID: 632717705}
   itemSellName: {fileID: 2112122391}
-  spritePera: {fileID: -9068026601010511230, guid: 4e847260be96eec4bb7b8cb78527f200, type: 3}
-  spriteManzana: {fileID: -1389860050349794336, guid: ab635ba00eb981f4da19923dee4bf27a, type: 3}
-  spriteTomate: {fileID: 8236432160196758994, guid: 1d8f6a4d41cf32948b8ca87ddd64350c, type: 3}
+  spritePear: {fileID: -9068026601010511230, guid: 4e847260be96eec4bb7b8cb78527f200, type: 3}
+  spriteApple: {fileID: -1389860050349794336, guid: ab635ba00eb981f4da19923dee4bf27a, type: 3}
+  spriteTomato: {fileID: 8236432160196758994, guid: 1d8f6a4d41cf32948b8ca87ddd64350c, type: 3}
   buyButton: {fileID: 1817367056}
   sellButton: {fileID: 1485383918}
   playerMoney: {fileID: 131825784}
@@ -7848,13 +7848,13 @@ MonoBehaviour:
   m_MultiSelect: 0
   m_Options:
     m_Options:
-    - m_Text: Manzana
+    - m_Text: Apple
       m_Image: {fileID: 0}
       m_Color: {r: 0.7735849, g: 0.2787825, b: 0.2787825, a: 1}
-    - m_Text: Tomate
+    - m_Text: Tomato
       m_Image: {fileID: 0}
       m_Color: {r: 0.690566, g: 0.19674617, b: 0.19674617, a: 1}
-    - m_Text: Pera
+    - m_Text: Pear
       m_Image: {fileID: 0}
       m_Color: {r: 0.64858407, g: 0.86415094, b: 0.32446414, a: 1}
   m_OnValueChanged:
@@ -8978,11 +8978,9 @@ MonoBehaviour:
   countText: {fileID: 47914337}
   listText: {fileID: 1521959011}
   actualValueText: {fileID: 578594601}
-  addInputField: {fileID: 320145636}
-  removeInputField: {fileID: 293007714}
+  generalInputField: {fileID: 0}
   numIDInputField: {fileID: 761580361}
   newNumInputField: {fileID: 357739943}
-  numRangeInputField: {fileID: 280514949}
   tickSign: {fileID: 8189813}
   crossSing: {fileID: 870192423}
 --- !u!114 &1758415126
@@ -10513,7 +10511,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Manzana
+  m_text: Apple
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -10649,7 +10647,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Manzana
+  m_text: Apple
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

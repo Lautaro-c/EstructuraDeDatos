@@ -364,8 +364,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -650.63, y: -349}
-  m_SizeDelta: {x: -1431.4805, y: -999.82}
+  m_AnchoredPosition: {x: -240.26181, y: -349}
+  m_SizeDelta: {x: -610.744, y: -999.82}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &196583227
 MonoBehaviour:
@@ -3455,11 +3455,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countText: {fileID: 47914337}
   listText: {fileID: 196583227}
-  actualValueText: {fileID: 0}
   emptyText: {fileID: 199593279}
-  GeneralInputField: {fileID: 320145636}
-  numIDInputField: {fileID: 0}
-  newNumInputField: {fileID: 0}
+  generalInputField: {fileID: 320145636}
   tickSign: {fileID: 8189813}
   crossSing: {fileID: 870192423}
 --- !u!114 &1758415127

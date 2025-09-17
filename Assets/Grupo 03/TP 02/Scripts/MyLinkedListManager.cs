@@ -12,7 +12,7 @@ public class MyLinkedListManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI countText;
     [SerializeField] private TextMeshProUGUI listText;
     [SerializeField] private TextMeshProUGUI emptyText;
-    [SerializeField] private TMP_InputField GeneralInputField;
+    [SerializeField] private TMP_InputField generalInputField;
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
@@ -30,7 +30,7 @@ public class MyLinkedListManager : MonoBehaviour
 
     public void AddNumber()
     {
-        if (int.TryParse(GeneralInputField.text, out int result))
+        if (int.TryParse(generalInputField.text, out int result))
         {
             linkedList.Add((int)result); // Explicitly cast to resolve ambiguity  
             Debug.Log("Número ingresado: " + result);
@@ -43,7 +43,7 @@ public class MyLinkedListManager : MonoBehaviour
 
     public void AddNumbersRange()
     {
-        string input = GeneralInputField.text;
+        string input = generalInputField.text;
         string[] parts = input.Split(',');
         int[] partsNumbers = new int[parts.Length];
         for (int i = 0; i < parts.Length; i++)
@@ -76,7 +76,7 @@ public class MyLinkedListManager : MonoBehaviour
 
     public void RemoveNumber()
     {
-        if (int.TryParse(GeneralInputField.text, out int result))
+        if (int.TryParse(generalInputField.text, out int result))
         {
             if (linkedList.Remove(result))
             {
@@ -102,7 +102,7 @@ public class MyLinkedListManager : MonoBehaviour
     }
     public void RemoveAtIndex()
     {
-        if (int.TryParse(GeneralInputField.text, out int index))
+        if (int.TryParse(generalInputField.text, out int index))
         {
             if (linkedList.RemoveAt(index))
             {

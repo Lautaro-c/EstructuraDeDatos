@@ -7,7 +7,7 @@ using static UnityEditor.Progress;
 public class StoreDictionary<TKey, TValue>
 {
     //keys: array de enteros que guarda los IDs.
-    // values: array de Item que guarda los ítems correspondientes.
+    //values: array de Item que guarda los ítems correspondientes.
 
     private TKey[] keys;
     private TValue[] values;
