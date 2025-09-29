@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using System.Collections;
+using UnityEngine;
 
-public class BinarySearchTree
+
+public class BinarySearchTree : MonoBehaviour
 {
     public Node<int> Root;
-
+    MyQueue<Node<int>> queue = new MyQueue<Node<int>>();
     public BinarySearchTree()
     {
         Root = new Node<int>(default);
@@ -107,4 +109,42 @@ public class BinarySearchTree
         PostOrderRecursive(current.Right, list);
         list.Add(current);
     }
+
+    public SimpleList<Node<int>> LevelOrder()
+    {
+        SimpleList<Node<int>> levelOrderList = new SimpleList<Node<int>>();
+        queue.Clear();
+
+        if (Root == null || Root.Data.Equals(default(int))) return levelOrderList;
+
+        BFS(Root);
+
+        for (int i = 0; i < queue.Count; i++)
+        {
+            levelOrderList.Add(queue.Dequeue());
+        }
+
+        return levelOrderList;
+    }
+
+    public void BFS(Node<int> current)
+    {
+        queue.Enqueue(current);
+        while (queue.Count > 0)
+        {
+            current = queue.Dequeue();
+            Debug.Log(current.Data.ToString());
+            if(current.Left != null)
+            {
+                queue.Enqueue(current.Left);
+            }
+            if (current.Right != null)
+            {
+                queue.Enqueue(current.Right);
+            }
+        }
+
+    }
+
+
 }
