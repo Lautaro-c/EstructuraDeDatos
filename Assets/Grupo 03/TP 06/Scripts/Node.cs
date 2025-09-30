@@ -7,7 +7,6 @@ public class Node<T> where T : IComparable<T>
 {
     // datos a almacenar, en este caso un entero
     public T Data;
-
     //referencia los nodos izquierdo y derecho
     public Node<T> Left;
     public Node<T> Right;
