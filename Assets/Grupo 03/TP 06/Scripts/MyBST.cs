@@ -4,13 +4,12 @@ using System.Collections;
 using UnityEngine;
 
 
-public class BinarySearchTree<T> : MonoBehaviour where T : IComparable<T>
+public class MyBST<T> where T : IComparable<T>
 {
     public Node<T> Root;
-    MyQueue<Node<T>> queue = new MyQueue<Node<T>>();
-    public BinarySearchTree()
+    public MyBST()
     {
-        Root = new Node<T>(default);
+        Root = null;
     }
     public void Insert(T value)
     {
@@ -20,7 +19,7 @@ public class BinarySearchTree<T> : MonoBehaviour where T : IComparable<T>
     {
         if (current == null)
         {
-            current = new Node<T>(value);
+            return new Node<T>(value);
         }
         if (value.CompareTo(current.Data) < 0)
         {
@@ -113,27 +112,26 @@ public class BinarySearchTree<T> : MonoBehaviour where T : IComparable<T>
     public SimpleList<Node<T>> LevelOrder()
     {
         SimpleList<Node<T>> levelOrderList = new SimpleList<Node<T>>();
-        queue.Clear();
 
-        if (Root == null || Root.Data.Equals(default(T))) return levelOrderList;
-
-        BFS(Root);
-
-        for (int i = 0; i < queue.Count; i++)
+        if (Root == null || Root.Data.Equals(default(T)))
         {
-            levelOrderList.Add(queue.Dequeue());
+            return levelOrderList;
         }
+
+        levelOrderList = BFS(Root);
 
         return levelOrderList;
     }
 
-    public void BFS(Node<T> current)
+    public SimpleList<Node<T>> BFS(Node<T> start)
     {
-        queue.Enqueue(current);
+        MyQueue<Node<T>> queue = new MyQueue<Node<T>>();
+        SimpleList<Node<T>> levelOrderList = new SimpleList<Node<T>>();
+        queue.Enqueue(start);
         while (queue.Count > 0)
         {
-            current = queue.Dequeue();
-            Debug.Log(current.Data.ToString());
+            Node <T> current = queue.Dequeue();
+            levelOrderList.Add(current);
             if(current.Left != null)
             {
                 queue.Enqueue(current.Left);
@@ -143,7 +141,13 @@ public class BinarySearchTree<T> : MonoBehaviour where T : IComparable<T>
                 queue.Enqueue(current.Right);
             }
         }
+        Debug.Log(levelOrderList.Count.ToString());
+        return levelOrderList;
+    }
 
+    public void Clear()
+    {
+        Root = null;
     }
 
 
