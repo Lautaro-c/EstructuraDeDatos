@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Node<T>
+public class Node<T> where T : IComparable<T>
 {
     // datos a almacenar, en este caso un entero
     public T Data;
