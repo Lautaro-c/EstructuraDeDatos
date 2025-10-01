@@ -12,6 +12,9 @@ public class BSTManager : MonoBehaviour
     [SerializeField] private RectTransform canvasTransform;
     [SerializeField] private SimpleList<GameObject> gameObjectsList;
     [SerializeField] private TMP_InputField inputField;
+    [SerializeField] private TMP_Text inOrderText;
+    [SerializeField] private TMP_Text preOrderText;
+
     private int[] myArray = { 20, 10, 1, 26, 35, 40, 18, 12, 15, 14, 30, 23 };
     private float initialYPos = 391;
     void Start()
@@ -54,6 +57,9 @@ public class BSTManager : MonoBehaviour
             nodeGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
             gameObjectsList.Add(nodeGO);
         }
+
+        UpdateInOrderUI();
+
     }
 
     public void ClearTree()
@@ -80,5 +86,35 @@ public class BSTManager : MonoBehaviour
         DrawTree();
     }
 
+    private void UpdateInOrderUI()
+    {
+        SimpleList<Node<int>> nodesList = myBst.InOrder();
+        string result = "InOrder: ";
+
+        for (int i = 0; i < nodesList.Count; i++)
+        {
+            result += nodesList[i].Data.ToString();
+            if (i < nodesList.Count - 1)
+                result += ", ";
+        }
+
+        inOrderText.text = result;
+    }
+
+    private void UpdatePreOrderUI()
+    {
+        SimpleList<Node<int>> nodesList = myBst.PreOrder();
+        string result = "PreOrder: ";
+
+        for (int i = 0; i < nodesList.Count; i++)
+        {
+            result += nodesList[i].Data.ToString();
+            if (i < nodesList.Count - 1)
+                result += ", ";
+        }
+
+        preOrderText.text = result;
+
+    }
 
 }
