@@ -14,6 +14,8 @@ public class BSTManager : MonoBehaviour
     [SerializeField] private TMP_InputField inputField;
     [SerializeField] private TMP_Text inOrderText;
     [SerializeField] private TMP_Text preOrderText;
+    [SerializeField] private TMP_Text balanceFactorText;
+    [SerializeField] private TMP_Text levelOrderText;
 
     private int[] myArray = { 20, 10, 1, 26, 35, 40, 18, 12, 15, 14, 30, 23 };
     private float initialYPos = 391;
@@ -59,7 +61,9 @@ public class BSTManager : MonoBehaviour
         }
 
         UpdateInOrderUI();
-
+        int balanceFactor = myBst.GetBalanceFactor();
+        GetBalanceFactor(balanceFactor);
+        ShowLevelOrder();
     }
 
     public void ClearTree()
@@ -71,7 +75,18 @@ public class BSTManager : MonoBehaviour
         gameObjectsList.Clear();
         myBst.Clear();
     }
-
+    public void ShowLevelOrder()
+    {
+        SimpleList<Node<int>> nodesList = myBst.LevelOrder();
+        string result = "LevelOrder: ";
+        for (int i = 0; i < nodesList.Count; i++)
+        {
+            result += nodesList[i].Data.ToString();
+            if (i < nodesList.Count - 1)
+                result += ", ";
+        }
+        levelOrderText.text = result;
+    }
     public void AddRange()
     {
         string input = inputField.text;
@@ -100,7 +115,21 @@ public class BSTManager : MonoBehaviour
 
         inOrderText.text = result;
     }
-
+    public void GetBalanceFactor(int factor)
+    {
+        switch (factor)
+        {
+            case <=-1: 
+                balanceFactorText.text = $"Árbol cargado a la derecha, el factor es de {factor}";
+                break;
+            case 0:
+                balanceFactorText.text = $"Árbol balanceado, el factor es de {factor}";
+                break;
+            case >=1:
+                balanceFactorText.text = $"Árbol cargado a la izquierda, el factor es de {factor}";
+                break;
+        }
+    }
     private void UpdatePreOrderUI()
     {
         SimpleList<Node<int>> nodesList = myBst.PreOrder();
