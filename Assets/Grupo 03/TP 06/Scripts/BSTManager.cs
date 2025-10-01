@@ -16,6 +16,8 @@ public class BSTManager : MonoBehaviour
     [SerializeField] private TMP_Text preOrderText;
     [SerializeField] private TMP_Text balanceFactorText;
     [SerializeField] private TMP_Text levelOrderText;
+    [SerializeField] private TMP_Text heightText;
+    [SerializeField] private TMP_Text postOrderText;
 
     private int[] myArray = { 20, 10, 1, 26, 35, 40, 18, 12, 15, 14, 30, 23 };
     private float initialYPos = 391;
@@ -61,9 +63,12 @@ public class BSTManager : MonoBehaviour
         }
 
         UpdateInOrderUI();
+        UpdatePreOrderUI();
+        UpdatePostOrderUI();
         int balanceFactor = myBst.GetBalanceFactor();
         GetBalanceFactor(balanceFactor);
         ShowLevelOrder();
+        UpdateHeightUI();
     }
 
     public void ClearTree()
@@ -129,6 +134,24 @@ public class BSTManager : MonoBehaviour
                 balanceFactorText.text = $"Árbol cargado a la izquierda, el factor es de {factor}";
                 break;
         }
+    }
+    private void UpdatePostOrderUI()
+    {
+        SimpleList<Node<int>> nodesList = myBst.PostOrder();
+        string result = "PostOrder: ";
+
+        for (int i = 0; i < nodesList.Count; i++)
+        {
+            result += nodesList[i].Data.ToString();
+            if (i < nodesList.Count - 1)
+                result += ", ";
+        }
+        postOrderText.text = result;
+    }
+    private void UpdateHeightUI()
+    {
+        int height = myBst.GetHeight();
+        heightText.text = "Altura: " + height.ToString();
     }
     private void UpdatePreOrderUI()
     {
