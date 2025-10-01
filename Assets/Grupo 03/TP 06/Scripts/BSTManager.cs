@@ -45,8 +45,8 @@ public class BSTManager : MonoBehaviour
     public void DrawTree()
     {
         SimpleList<Node<int>> nodesList = myBst.InOrder();
-        float horizontalSpacing = 100f;
-        float verticalSpacing = 140f;
+        float horizontalSpacing = 75f;
+        float verticalSpacing = 120f;
 
         for (int i = 0; i < nodesList.Count; i++)
         {

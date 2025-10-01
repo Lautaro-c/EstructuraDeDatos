@@ -39,7 +39,7 @@ public class MyBST<T> where T : IComparable<T>
     {
         if (current == null)
         {
-            return -1;
+            return -2;
         }
         int leftHeight = GetHeightRecursive(current.Left);
         int rightHeight = GetHeightRecursive(current.Right);
