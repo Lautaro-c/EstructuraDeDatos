@@ -59,4 +59,20 @@ public class AVLTree<T> : MyBST<T> where T : IComparable<T>
         }
         return actualNode;
     }
+
+    public List<T> InOrderTraversal()
+    {
+        List<T> result = new List<T>();
+        InOrderTraversal(Root, result);
+        return result;
+    }
+
+    private void InOrderTraversal(Node<T> node, List<T> result)
+    {
+        if (node == null) return;
+        InOrderTraversal(node.Left, result);
+        result.Add(node.Data);
+        InOrderTraversal(node.Right, result);
+    }
+
 }
