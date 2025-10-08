@@ -1,10 +1,13 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class LeaderboardManager : MonoBehaviour
 {
     public Transform contentPanel;
     public GameObject scorePrefab;
+    public TMP_InputField inputName;
+    public TMP_InputField inputScore;
     public AVLTree<ScoreEntry> scoreTree = new AVLTree<ScoreEntry>();
 
     void Start()
@@ -36,4 +39,19 @@ public class LeaderboardManager : MonoBehaviour
             item.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = entry.ToString();
         }
     }
+    public void AddScoreInput()
+    {
+        string playerName = inputName.text;
+        if (int.TryParse(inputScore.text, out int score))
+        {
+            AddNewScore(playerName, score);
+            inputName.text = "";
+            inputScore.text = "";
+        }
+        else
+        {
+            Debug.LogWarning("Puntaje inválido");
+        }
+    }
+
 }
