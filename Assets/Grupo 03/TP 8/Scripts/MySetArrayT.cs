@@ -2,13 +2,27 @@ using UnityEngine;
 
 public class MySetArray<T> : MySet<T>
 {
-    private T[] elements = new T[100];
+    private T[] elements;
     private int count = 0;
 
-    public override void Add(T item)
+    public MySetArray()
+    {
+        elements = new T[100];
+    }
+
+    public MySetArray (int amount)
+    {
+       elements = new T[amount];
+    }
+
+    public override bool Add(T item)
     {
         if (!Contains(item) && count < elements.Length)
+        {
             elements[count++] = item;
+            return true;
+        }
+        return false;
     }
 
     public override void Remove(T item)

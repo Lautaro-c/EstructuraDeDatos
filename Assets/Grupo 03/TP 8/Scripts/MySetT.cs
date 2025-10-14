@@ -1,6 +1,6 @@
 public abstract class MySet<T>
 {
-    public abstract void Add(T item);
+    public abstract bool Add(T item);
     public abstract void Remove(T item);
     public abstract void Clear();
     public abstract bool Contains(T item);

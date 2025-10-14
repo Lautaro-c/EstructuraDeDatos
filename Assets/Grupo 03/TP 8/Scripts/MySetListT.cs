@@ -6,13 +6,14 @@ public class MySetList<T> : MySet<T>
 {
     private List<T> elements = new List<T>();
 
-    public override void Add(T item)
+    public override bool Add(T item)
     {
         if (!elements.Contains(item))
         {
             elements.Add(item);
+            return true;
         }
-            
+        return false;
     }
 
     public override void Remove(T item) => elements.Remove(item);
