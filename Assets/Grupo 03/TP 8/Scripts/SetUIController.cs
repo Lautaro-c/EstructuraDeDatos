@@ -1,74 +1,101 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SetUIController : MonoBehaviour
 {
-    public InputField inputA, inputB;
-    public Text showA, showB, infoA, infoB, resultado;
+    [SerializeField] ItemListSOTP08 allItems;
+    [SerializeField] GameObject itemPrefab;
+    [SerializeField] private PlayerInventoryTP08 player1Inventory;
+    [SerializeField] private PlayerInventoryTP08 player2Inventory;
+    private MySetArray<ItemSOTP8> player1InventorySet;
+    private MySetArray<ItemSOTP8> player2InventorySet;
 
-    private MySetList<string> setA = new MySetList<string>();
-    private MySetList<string> setB = new MySetList<string>();
-
-    public void AddToA()
+    private void Start()
     {
-        setA.Add(inputA.text);
-        UpdateUI();
+        player1InventorySet = player1Inventory.inventoryItems;
+        player2InventorySet = player2Inventory.inventoryItems;
     }
 
-    public void RemoveFromA()
+    private void ClearItems()
     {
-        setA.Remove(inputA.text);
-        UpdateUI();
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
-    public void ClearA()
+    public void ShaderItems()
     {
-        setA.Clear();
-        UpdateUI();
+        ClearItems();
+        MySet<ItemSOTP8> Set = player1InventorySet.IntersectWith(player2InventorySet);
+        for (int i = 0; i < Set.Count(); i++)
+        {
+            ItemSOTP8 item = Set.elements[i];
+            GameObject newItem = itemPrefab;
+            newItem.GetComponent<Image>().sprite = item.Sprite;
+            Transform nameTextTransform = newItem.transform.Find("NameText");
+            if (nameTextTransform != null)
+            {
+                TextMeshProUGUI texto = nameTextTransform.GetComponent<TextMeshProUGUI>();
+                if (texto != null)
+                {
+                    texto.text = Set.elements[i].name;
+                }
+            }
+            Transform priceTextTransform = newItem.transform.Find("PriceText");
+            if (priceTextTransform != null)
+            {
+                TextMeshProUGUI texto = priceTextTransform.GetComponent<TextMeshProUGUI>();
+                if (texto != null)
+                {
+                    texto.text = "$" + Set.elements[i].Price.ToString();
+                }
+            }
+            GameObject instantiatedItem = Instantiate(newItem, this.transform);
+            instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
+        }
     }
 
-    public void AddToB()
+    public void MissingItems()
     {
-        setB.Add(inputB.text);
-        UpdateUI();
-    }
+        ClearItems();
+        MySet<ItemSOTP8> preSet = player1InventorySet.UnionWith(player2InventorySet);
+        MySetArray<ItemSOTP8> allItemsSet = new MySetArray<ItemSOTP8>();
+        for (int i = 0; i < 20;  i++)
+        {
+            allItemsSet.Add(allItems.items[i]);
+        }
 
-    public void RemoveFromB()
-    {
-        setB.Remove(inputB.text);
-        UpdateUI();
-    }
-
-    public void ClearB()
-    {
-        setB.Clear();
-        UpdateUI();
-    }
-
-    public void UnionSets()
-    {
-        var union = setA.UnionWith(setB);
-        resultado.text = "Unión: " + union.ToString();
-    }
-
-    public void IntersectSets()
-    {
-        var inter = setA.IntersectWith(setB);
-        resultado.text = "Intersección: " + inter.ToString();
-    }
-
-    public void DifferenceSets()
-    {
-        var diff = setA.DifferenceWith(setB);
-        resultado.text = "Diferencia A - B: " + diff.ToString();
-    }
-
-    private void UpdateUI()
-    {
-        showA.text = "Set A: " + setA.ToString();
-        infoA.text = $"Count: {setA.Count()} | Empty: {setA.IsEmpty()}";
-
-        showB.text = "Set B: " + setB.ToString();
-        infoB.text = $"Count: {setB.Count()} | Empty: {setB.IsEmpty()}";
+        MySet<ItemSOTP8> Set = allItemsSet.DifferenceWith(preSet);
+        for (int i = 0; i < Set.Count(); i++)
+        {
+            ItemSOTP8 item = Set.elements[i];
+            GameObject newItem = itemPrefab;
+            newItem.GetComponent<Image>().sprite = item.Sprite;
+            Transform nameTextTransform = newItem.transform.Find("NameText");
+            if (nameTextTransform != null)
+            {
+                TextMeshProUGUI texto = nameTextTransform.GetComponent<TextMeshProUGUI>();
+                if (texto != null)
+                {
+                    texto.text = Set.elements[i].name;
+                }
+            }
+            Transform priceTextTransform = newItem.transform.Find("PriceText");
+            if (priceTextTransform != null)
+            {
+                TextMeshProUGUI texto = priceTextTransform.GetComponent<TextMeshProUGUI>();
+                if (texto != null)
+                {
+                    texto.text = "$" + Set.elements[i].Price.ToString();
+                }
+            }
+            GameObject instantiatedItem = Instantiate(newItem, this.transform);
+            instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
+        }
     }
 }
+
+
+

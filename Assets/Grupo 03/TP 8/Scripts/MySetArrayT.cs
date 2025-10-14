@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class MySetArray<T> : MySet<T>
 {
-    private T[] elements;
     private int count = 0;
 
     public MySetArray()
@@ -69,8 +68,7 @@ public class MySetArray<T> : MySet<T>
     {
         var result = new MySetArray<T>();
         for (int i = 0; i < count; i++) result.Add(elements[i]);
-        foreach (var item in other.ToString().Split(", "))
-            result.Add((T)System.Convert.ChangeType(item, typeof(T)));
+        for (int i = 0; i < other.Count(); i++) result.Add(other.elements[i]);
         return result;
     }
 

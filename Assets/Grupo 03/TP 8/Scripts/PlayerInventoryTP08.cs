@@ -8,7 +8,7 @@ public class PlayerInventoryTP08 : MonoBehaviour
 {
     [SerializeField] ItemListSOTP08 allItems;
     [SerializeField] GameObject itemPrefab;
-    private MySetArray<ItemSOTP8> inventoryItems;
+    public MySetArray<ItemSOTP8> inventoryItems;
     private int slotsAmount = 10;
     private int randomFilledSlots = 0;
     private int randomItemID = 0;
@@ -45,6 +45,10 @@ public class PlayerInventoryTP08 : MonoBehaviour
                 }
                 GameObject instantiatedItem = Instantiate(newItem, this.transform);
                 instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
+            }
+            else
+            {
+                Debug.Log("Repetition prevented");
             }
         }
     }

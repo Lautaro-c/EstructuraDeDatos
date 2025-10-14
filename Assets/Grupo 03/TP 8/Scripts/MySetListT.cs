@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class MySetList<T> : MySet<T>
 {
-    private List<T> elements = new List<T>();
+    private List<T> elementsList = new List<T>();
 
     public override bool Add(T item)
     {
         if (!elements.Contains(item))
         {
-            elements.Add(item);
+            elementsList.Add(item);
             return true;
         }
         return false;
     }
 
-    public override void Remove(T item) => elements.Remove(item);
+    public override void Remove(T item) => elementsList.Remove(item);
 
-    public override void Clear() => elements.Clear();
+    public override void Clear() => elementsList.Clear();
 
     public override bool Contains(T item) => elements.Contains(item);
 
@@ -30,9 +30,9 @@ public class MySetList<T> : MySet<T>
 
     public override string ToString() => string.Join(", ", elements);
 
-    public override int Count() => elements.Count;
+    public override int Count() => elementsList.Count;
 
-    public override bool IsEmpty() => elements.Count == 0;
+    public override bool IsEmpty() => elementsList.Count == 0;
 
     public override MySet<T> UnionWith(MySet<T> other)
     {
