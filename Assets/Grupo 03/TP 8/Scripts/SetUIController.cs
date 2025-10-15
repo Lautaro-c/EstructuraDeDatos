@@ -8,6 +8,8 @@ public class SetUIController : MonoBehaviour
     [SerializeField] GameObject itemPrefab;
     [SerializeField] private PlayerInventoryTP08 player1Inventory;
     [SerializeField] private PlayerInventoryTP08 player2Inventory;
+    [SerializeField] private GameObject inventory1Text;
+    [SerializeField] private GameObject inventory2Text;
     private MySetArray<ItemSOTP8> player1InventorySet;
     private MySetArray<ItemSOTP8> player2InventorySet;
 
@@ -27,6 +29,7 @@ public class SetUIController : MonoBehaviour
 
     public void ShaderItems()
     {
+        DesactivateTexts();
         ClearItems();
         MySet<ItemSOTP8> Set = player1InventorySet.IntersectWith(player2InventorySet);
         for (int i = 0; i < Set.Count(); i++)
@@ -59,6 +62,7 @@ public class SetUIController : MonoBehaviour
 
     public void MissingItems()
     {
+        DesactivateTexts();
         ClearItems();
         MySet<ItemSOTP8> preSet = player1InventorySet.UnionWith(player2InventorySet);
         MySetArray<ItemSOTP8> allItemsSet = new MySetArray<ItemSOTP8>();
@@ -94,6 +98,21 @@ public class SetUIController : MonoBehaviour
             GameObject instantiatedItem = Instantiate(newItem, this.transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
         }
+    }
+
+    private void DesactivateTexts()
+    {
+        inventory1Text.SetActive(false);
+        inventory2Text.SetActive(false);
+    }
+
+    public void ItemsAmount()
+    {
+        ClearItems();
+        inventory1Text.SetActive(true);
+        inventory2Text.SetActive(true);
+        inventory1Text.GetComponent<TextMeshProUGUI>().text = "Player 1 has " + player1InventorySet.Count() + " items";
+        inventory2Text.GetComponent<TextMeshProUGUI>().text = "Player 2 has " + player2InventorySet.Count() + " items";
     }
 }
 
