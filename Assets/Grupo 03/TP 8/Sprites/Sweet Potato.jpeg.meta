@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Sweet Potato_0: 7419178077243204279
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

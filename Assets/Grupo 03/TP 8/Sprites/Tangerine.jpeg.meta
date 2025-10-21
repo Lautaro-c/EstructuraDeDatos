@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Tangerine_0: -729742404722377149
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

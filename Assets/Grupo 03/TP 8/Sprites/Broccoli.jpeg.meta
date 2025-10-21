@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Broccoli_0: -918663293682559355
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
