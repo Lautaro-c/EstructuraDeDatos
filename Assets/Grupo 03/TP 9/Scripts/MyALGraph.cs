@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class MyALGraph<T>
 {
-    Dictionary<T, List<(T to, int weight)>> adjList = new Dictionary<T, List<(T to, int weight)>>();
+    Dictionary<T, List<(T to, float weight)>> adjList = new Dictionary<T, List<(T to, float weight)>>();
     public IEnumerable<T> Vertices => adjList.Keys;
     public void AddVertex (T vertex)
     {
         if (!adjList.ContainsKey(vertex))
         {
-            adjList.Add(vertex, new List<(T to, int weight)>()); // key: vertex, value: neighbours list
-
+            adjList.Add(vertex, new List<(T to, float weight)>()); // key: vertex, value: neighbours list
         }
     }
     public void RemoveVertex (T vertex)
@@ -25,12 +24,12 @@ public class MyALGraph<T>
             }
         }
     }
-    public void AddEdge (T from, (T to,int weight) edge) // edge is a tuple (neighbour, weight)
+    public void AddEdge (T from, (T to, float weight) edge) // edge is a tuple (neighbour, weight)
     {
         var (to, weight) = edge;
 
-        if (!adjList.ContainsKey(from)) adjList[from] = new List<(T, int)>();
-        if (!adjList.ContainsKey(to)) adjList[to] = new List<(T, int)>();
+        if (!adjList.ContainsKey(from)) adjList[from] = new List<(T, float)>();
+        if (!adjList.ContainsKey(to)) adjList[to] = new List<(T, float)>();
 
         var list = adjList[from];
         bool exists = false;
@@ -70,7 +69,7 @@ public class MyALGraph<T>
         }
         return false;
     }
-    public int GetWeight(T from, T to)
+    public float GetWeight(T from, T to)
     {
         if (adjList.ContainsKey(from))
         {
