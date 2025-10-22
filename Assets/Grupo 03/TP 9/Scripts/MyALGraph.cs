@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class MyALGraph<T>
 {
-    Dictionary<T, List<(T, int)>> adjList = new Dictionary<T, List<(T, int)>>();
-    public IEnumerable<T> Vertices()
-    {
-        return adjList.Keys;
-    }
+    Dictionary<T, List<(T to, int weight)>> adjList = new Dictionary<T, List<(T to, int weight)>>();
+    public IEnumerable<T> Vertices => adjList.Keys;
     public void AddVertex (T vertex)
     {
         if (!adjList.ContainsKey(vertex))
         {
-            adjList.Add(vertex, new List<(T, int)>()); // key: vertex, value: neighbours list
+            adjList.Add(vertex, new List<(T to, int weight)>()); // key: vertex, value: neighbours list
 
         }
     }
@@ -24,7 +21,7 @@ public class MyALGraph<T>
             adjList.Remove(vertex);
             foreach (T vtx in adjList.Keys)
             {
-                adjList[vtx].RemoveAll(e => EqualityComparer<T>.Default.Equals(e.Item1, vertex)); // removes edge from each neighbour list (reference)
+                adjList[vtx].RemoveAll(e => Equals(e.to, vertex));
             }
         }
     }
@@ -54,7 +51,34 @@ public class MyALGraph<T>
     {
         if (adjList.ContainsKey(from))
         {
-            adjList[from].RemoveAll(e => EqualityComparer<T>.Default.Equals(e.Item1, to)); // removes edge from neighbour list (reference)
+            adjList[from].RemoveAll(e => Equals(e.to, to));
         }
     }
-}   
+    public bool ContainsVertex(T vertex)
+    {
+        if (adjList.ContainsKey(vertex)) return true;
+        else return false;
+    }
+    public bool ContainsEdge(T from, T to)
+    {
+        if (adjList.ContainsKey(from))
+        {
+            foreach (var edge in adjList[from])
+            {
+                if (Equals(edge.to, to)) return true;
+            }
+        }
+        return false;
+    }
+    public int GetWeight(T from, T to)
+    {
+        if (adjList.ContainsKey(from))
+        {
+            foreach (var edge in adjList[from])
+            {
+                if (Equals(edge.to, to)) return edge.weight;
+            }
+        }
+        return -1; // indica que no existe la arista
+    }
+}
