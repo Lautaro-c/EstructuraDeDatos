@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Urano_0: 3839384363902419297
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

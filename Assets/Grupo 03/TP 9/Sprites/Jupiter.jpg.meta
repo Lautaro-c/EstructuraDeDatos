@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Jupiter_0: -4840658929073548887
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
