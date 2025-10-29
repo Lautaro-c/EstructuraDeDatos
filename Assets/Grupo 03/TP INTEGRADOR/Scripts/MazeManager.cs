@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MazeManager : MonoBehaviour
 {
     public GameObject tilePrefab; //Prefab para las celdas del laberinto
-    public int width = 12, height = 12; //Dimensiones del laberinto
+    private int width = 12, height = 12; //Dimensiones del laberinto
     public Pathfinder pathfinder; //Referencia al componente Pathfinder
     public Transform character; //Referencia al personaje que se moverá por el laberinto
-    public Text statusText; //Texto para mostrar el estado de la solución
+    public TextMeshProUGUI statusText; //Texto para mostrar el estado de la solución
     public Button solveButton; //Botón para iniciar la solución del laberinto
 
     //Matriz que representa el laberinto
