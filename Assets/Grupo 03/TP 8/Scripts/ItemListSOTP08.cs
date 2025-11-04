@@ -12,10 +12,17 @@ public class ItemListSOTP08 : ScriptableObject
     private void OnValidate()
     {
         //Asignamos los IDs de todos los items
-        if (items == null) return;
+        if (items == null)
+        {
+            return;
+        }
 
         for (int i = 0; i < items.Length; i++)
+        {
             if (items[i] != null)
+            {
                 items[i].ID = i;
+            }
+        }
     }
 }

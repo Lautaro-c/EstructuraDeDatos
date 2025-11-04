@@ -11,6 +11,7 @@ public class Node<T> where T : IComparable<T>
     public Node<T> Left;
     public Node<T> Right;
 
+    //Inicializa el nodo con la data y referencia a sus hijos izquiedo y derecho
     public Node(T  data, Node<T> left, Node<T> right)
     {
         this.Data = data;
@@ -18,6 +19,7 @@ public class Node<T> where T : IComparable<T>
         this.Right = right;
     }
 
+    //Inicializa el nodo con la data
     public Node(T data)
     {
         this.Data = data;
