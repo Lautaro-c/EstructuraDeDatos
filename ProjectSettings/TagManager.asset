@@ -7,6 +7,11 @@ TagManager:
   - Door
   - Barrier
   - DoorStart
+  - StartTile
+  - EndTile
+  - EmptyTile
+  - WallTile
+  - EditableTile
   layers:
   - Default
   - TransparentFX

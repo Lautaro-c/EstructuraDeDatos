@@ -7,7 +7,7 @@ using TMPro;
 public class MazeManager : MonoBehaviour
 {
     public GameObject tilePrefab; //Prefab para las celdas del laberinto
-    private int width = 12, height = 12; //Dimensiones del laberinto
+    private int width = 10, height = 10; //Dimensiones del laberinto
     public Pathfinder pathfinder; //Referencia al componente Pathfinder
     public Transform character; //Referencia al personaje que se moverá por el laberinto
     public TextMeshProUGUI statusText; //Texto para mostrar el estado de la solución
@@ -35,11 +35,16 @@ public class MazeManager : MonoBehaviour
         {
             for (int y = 0; y < height; y++)
             {
-                var tileGO = Instantiate(tilePrefab, new Vector3(x, y, 0), Quaternion.identity);
+                Vector2Int gridIndex = new Vector2Int(x, y);
+                Vector3 worldPos = GridToWorld(gridIndex);
+
+                var tileGO = Instantiate(tilePrefab, worldPos, Quaternion.identity);
                 var tile = tileGO.GetComponent<Tile>();
-                tile.gridPos = new Vector2Int(x, y);
+
+                tile.gridIndex = gridIndex;
                 tile.type = TileType.Empty;
                 tile.SetColor(Color.white);
+
                 grid[x, y] = tile;
             }
         }
@@ -47,16 +52,26 @@ public class MazeManager : MonoBehaviour
 
     //Cambia el tipo y color de un tile según el modo activo
     //Si es entrada o salida, guarda la posición para el pathfinding
-    public void SetTileType(Vector2Int pos, TileType type)
+    public void SetTileType(GameObject tileGO, TileType type)
     {
-        var tile = grid[pos.x, pos.y];
+        Tile tile = tileGO.GetComponent<Tile>();
         tile.type = type;
         switch (type)
         {
-            case TileType.Empty: tile.SetColor(Color.white); break;
-            case TileType.Wall: tile.SetColor(Color.black); break;
-            case TileType.Start: tile.SetColor(Color.blue); startPos = pos; break;
-            case TileType.End: tile.SetColor(Color.red); endPos = pos; break;
+            case TileType.Path: 
+                tile.UpdateColorByTipe(); 
+                break;
+            case TileType.Wall:
+                tile.UpdateColorByTipe();
+                break;
+            case TileType.Start:
+                tile.UpdateColorByTipe();
+                startPos = tile.gridIndex; 
+                break;
+            case TileType.End:
+                tile.UpdateColorByTipe();
+                endPos = tile.gridIndex;
+                break;
         }
     }
 
@@ -67,12 +82,20 @@ public class MazeManager : MonoBehaviour
     void SolveMaze()
     {
         var path = pathfinder.FindPath(startPos, endPos);
+        Debug.Log("Startpos: " + startPos);
+        Debug.Log("Endpos: " + endPos);
         if (path == null)
         {
             statusText.text = "Sin solución";
         }
         else
         {
+            List<Node> fullPath = pathfinder.FindPath(startPos, endPos);
+            for (int i = 0; i < fullPath.Count; i++)
+            {
+                Debug.Log("PosX " + fullPath[i].pos.x);
+                Debug.Log("PosY " + fullPath[i].pos.y);
+            }
             statusText.text = "Solución encontrada";
             foreach (var node in path)
             {
@@ -86,6 +109,14 @@ public class MazeManager : MonoBehaviour
             StartCoroutine(MoveCharacter(path));
         }
     }
+
+    Vector3 GridToWorld(Vector2Int gridIndex)
+    {
+        float offsetX = -4.45f;
+        float offsetY = -4.45f;
+        return new Vector3(gridIndex.x + offsetX, gridIndex.y + offsetY, 0);
+    }
+
 
     //Mueve el personaje por cada nodo del camino con una pausa de 0.2 segundos
     IEnumerator MoveCharacter(List<Node> path)
