@@ -50,7 +50,7 @@ public class MyBST<T> where T : IComparable<T>
         //si el actual es nulo devulve menos 2 (se interpreta como que no tiene altuna) 
         if (current == null)
         {
-            return -2;
+            return -1;
         }
         //llama recursivamente para medir la altura del subarvol izquierdo
         int leftHeight = GetHeightRecursive(current.Left);
@@ -63,6 +63,10 @@ public class MyBST<T> where T : IComparable<T>
 
     public int GetBalanceFactor()
     {
+        if (Root == null)
+        {
+            return -1;
+        }
         //recive la altura del subarbol izquierdo y le resta uno
         int subLeftTree = GetHeightRecursive(Root.Left) - 1;
         //recive la altura del subarbol derecho y le resta uno

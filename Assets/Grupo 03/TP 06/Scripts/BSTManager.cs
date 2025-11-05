@@ -159,13 +159,13 @@ public class BSTManager : MonoBehaviour
         switch (factor)
         {
             case <= -1:
-                balanceFactorText.text = $"햞bol cargado a la derecha, el factor es de {factor}";
+                balanceFactorText.text = $"햞bol cargado a la derecha, el factor de balance es de {factor}";
                 break;
             case 0:
-                balanceFactorText.text = $"햞bol balanceado, el factor es de {factor}";
+                balanceFactorText.text = $"햞bol balanceado, el factor de balance es de {factor}";
                 break;
             case >= 1:
-                balanceFactorText.text = $"햞bol cargado a la izquierda, el factor es de {factor}";
+                balanceFactorText.text = $"햞bol cargado a la izquierda, el factor de balance es de {factor}";
                 break;
         }
     }

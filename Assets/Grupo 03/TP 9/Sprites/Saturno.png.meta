@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Saturno_0: 8816500618212801430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BackgroundArcade_0: 683289625371678980
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

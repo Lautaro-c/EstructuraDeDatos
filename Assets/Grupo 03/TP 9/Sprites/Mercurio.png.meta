@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Mercurio_0: 2997251058848575311
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

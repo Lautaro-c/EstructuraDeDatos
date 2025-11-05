@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Neptuno_0: -6596738298347527001
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
