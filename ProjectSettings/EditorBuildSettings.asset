@@ -29,5 +29,20 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Grupo 03/MainMenu/Scenes/MainMenu.unity
     guid: 965624f7679a3cc43938ba39920225e2
+  - enabled: 1
+    path: Assets/Grupo 03/TP 06/TP06.unity
+    guid: 39f1de94d6180e343b53640eb2651723
+  - enabled: 1
+    path: Assets/Grupo 03/TP 07/TP07.unity
+    guid: 33c8e23265475f445aa62d2478d7d017
+  - enabled: 1
+    path: Assets/Grupo 03/TP 8/TP08.unity
+    guid: c9e7f44a0ec609446bec7452c3ee147f
+  - enabled: 1
+    path: Assets/Grupo 03/TP 9/TP09.unity
+    guid: f08d09107da3fa14197eba29f8d3715c
+  - enabled: 1
+    path: Assets/Grupo 03/TP INTEGRADOR/Ejercicio integrador.unity
+    guid: 3b0b9dec72982624199a73d3d37115de
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
