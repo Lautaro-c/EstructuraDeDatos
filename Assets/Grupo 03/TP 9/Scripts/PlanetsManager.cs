@@ -8,40 +8,48 @@ public class PlanetsManager : MonoBehaviour
     MyALGraph<GameObject> myALGraph;
     SimpleList<GameObject> planetsList;
     [SerializeField] private TextMeshProUGUI lenghtText;
-    [SerializeField] private GameObject Mercurio;
+    [SerializeField] private GameObject Mercury;
     [SerializeField] private GameObject Venus;
-    [SerializeField] private GameObject Tierra;
-    [SerializeField] private GameObject Marte;
+    [SerializeField] private GameObject Earth;
+    [SerializeField] private GameObject Mars;
     [SerializeField] private GameObject Jupiter;
-    [SerializeField] private GameObject Saturno;
-    [SerializeField] private GameObject Urano;
-    [SerializeField] private GameObject Neptuno;
+    [SerializeField] private GameObject Saturn;
+    [SerializeField] private GameObject Uranus;
+    [SerializeField] private GameObject Neptune;
+    [SerializeField] private TextMeshProUGUI MEConnection;
+    [SerializeField] private TextMeshProUGUI EVConnection;
+    [SerializeField] private TextMeshProUGUI UJConnection;
+    [SerializeField] private TextMeshProUGUI JMConnection;
+    [SerializeField] private TextMeshProUGUI MSConnection;
+    [SerializeField] private TextMeshProUGUI SNConnection;
+    [SerializeField] private TextMeshProUGUI EMConnection;
     void Start()
     {
         myALGraph = new MyALGraph<GameObject>();
         planetsList = new SimpleList<GameObject>();
-        myALGraph.AddVertex(Mercurio);
+        myALGraph.AddVertex(Mercury);
         myALGraph.AddVertex(Venus);
-        myALGraph.AddVertex(Tierra);
-        myALGraph.AddVertex(Marte);
+        myALGraph.AddVertex(Earth);
+        myALGraph.AddVertex(Mars);
         myALGraph.AddVertex(Jupiter);
-        myALGraph.AddVertex(Saturno);
-        myALGraph.AddVertex(Urano);
-        myALGraph.AddVertex(Neptuno);
-        AddWeightByDistance(Tierra, Venus);
-        AddWeightByDistance(Tierra, Mercurio);
-        AddWeightByDistance(Tierra, Marte);
-        AddWeightByDistance(Marte, Jupiter);
-        AddWeightByDistance(Jupiter, Urano);
-        AddWeightByDistance(Marte, Saturno);
-        AddWeightByDistance(Saturno, Neptuno);
+        myALGraph.AddVertex(Saturn);
+        myALGraph.AddVertex(Uranus);
+        myALGraph.AddVertex(Neptune);
+        EVConnection.text = AddWeightByDistance(Earth, Venus).ToString();
+        MEConnection.text = AddWeightByDistance(Earth, Mercury).ToString();
+        EMConnection.text = AddWeightByDistance(Earth, Mars).ToString();
+        JMConnection.text = AddWeightByDistance(Mars, Jupiter).ToString();
+        UJConnection.text = AddWeightByDistance(Jupiter, Uranus).ToString();
+        MSConnection.text = AddWeightByDistance(Mars, Saturn).ToString();
+        SNConnection.text = AddWeightByDistance(Saturn, Neptune).ToString();
     }
 
-    private void AddWeightByDistance(GameObject planet1, GameObject planet2)
+    private float AddWeightByDistance(GameObject planet1, GameObject planet2)
     {
         float distance = Vector2.Distance(planet1.transform.position, planet2.transform.position);
         myALGraph.AddEdge(planet1, (planet2, distance));
         myALGraph.AddEdge(planet2, (planet1, distance));
+        return distance;
     }
 
     public void PlanetClicked (GameObject planet)

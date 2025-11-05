@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      undertale-blue-fan-game_0: -4573666202059583830
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
