@@ -26,16 +26,15 @@ public class MyALGraph<T>
     }
     public void AddEdge (T from, (T to, float weight) edge) // edge is a tuple (neighbour, weight)
     {
-        var (to, weight) = edge;
 
         if (!adjList.ContainsKey(from)) adjList[from] = new List<(T, float)>();
-        if (!adjList.ContainsKey(to)) adjList[to] = new List<(T, float)>();
+        if (!adjList.ContainsKey(edge.to)) adjList[edge.to] = new List<(T, float)>();
 
         var list = adjList[from];
         bool exists = false;
         for (int i=0; i<list.Count; i++)
         {
-            if (Equals(list[i].Item1, to) && list[i].Item2 == weight) // si ya existe una tupla igual, no agrega
+            if (Equals(list[i].to, edge.to) && list[i].weight == edge.weight) // si ya existe una tupla igual, no agrega
             {
                 exists = true;
                 break;
@@ -43,7 +42,7 @@ public class MyALGraph<T>
         }
         if (!exists)
         {
-            list.Add((to, weight));
+            list.Add((edge.to, edge.weight));
         }
     }
     public void RemoveEdge (T from, T to)
@@ -62,9 +61,9 @@ public class MyALGraph<T>
     {
         if (adjList.ContainsKey(from))
         {
-            foreach (var edge in adjList[from])
+            foreach (var edgeTuple in adjList[from])
             {
-                if (Equals(edge.to, to)) return true;
+                if (Equals(edgeTuple.to, to)) return true;
             }
         }
         return false;
