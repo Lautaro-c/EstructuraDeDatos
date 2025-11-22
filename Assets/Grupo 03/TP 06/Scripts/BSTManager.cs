@@ -116,7 +116,9 @@ public class BSTManager : MonoBehaviour
         {
             result += nodesList[i].Data.ToString();
             if (i < nodesList.Count - 1)
+            {
                 result += ", ";
+            }
         }
         levelOrderText.text = result;
     }

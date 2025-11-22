@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridPos: {x: 0, y: 0}
+  gridIndex: {x: 0, y: 0}
   type: 0
   cost: 1
 --- !u!61 &-3055150021469017785

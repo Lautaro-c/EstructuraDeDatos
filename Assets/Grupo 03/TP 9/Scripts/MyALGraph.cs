@@ -27,8 +27,14 @@ public class MyALGraph<T>
     public void AddEdge (T from, (T to, float weight) edge) // edge is a tuple (neighbour, weight)
     {
 
-        if (!adjList.ContainsKey(from)) adjList[from] = new List<(T, float)>();
-        if (!adjList.ContainsKey(edge.to)) adjList[edge.to] = new List<(T, float)>();
+        if (!adjList.ContainsKey(from))
+        {
+            adjList[from] = new List<(T, float)>();
+        }
+        if (!adjList.ContainsKey(edge.to))
+        {
+            adjList[edge.to] = new List<(T, float)>();
+        }
 
         var list = adjList[from];
         bool exists = false;
@@ -54,8 +60,14 @@ public class MyALGraph<T>
     }
     public bool ContainsVertex(T vertex)
     {
-        if (adjList.ContainsKey(vertex)) return true;
-        else return false;
+        if (adjList.ContainsKey(vertex))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     public bool ContainsEdge(T from, T to)
     {
@@ -63,7 +75,10 @@ public class MyALGraph<T>
         {
             foreach (var edgeTuple in adjList[from])
             {
-                if (Equals(edgeTuple.to, to)) return true;
+                if (Equals(edgeTuple.to, to))
+                {
+                    return true;
+                }
             }
         }
         return false;
@@ -74,7 +89,10 @@ public class MyALGraph<T>
         {
             foreach (var edge in adjList[from])
             {
-                if (Equals(edge.to, to)) return edge.weight;
+                if (Equals(edge.to, to))
+                {
+                    return edge.weight;
+                }
             }
         }
         return -1; // indica que no existe la arista

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Runtime.CompilerServices;
 
 public class MazeManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MazeManager : MonoBehaviour
     public Transform character; //Referencia al personaje que se moverá por el laberinto
     public TextMeshProUGUI statusText; //Texto para mostrar el estado de la solución
     public Button solveButton; //Botón para iniciar la solución del laberinto
+    private SimpleList<Tile> greenPath;
+    private Vector3 originalCharaceterPos = new Vector3(-7.28f, -3.28f, 0);
 
     //Matriz que representa el laberinto
     private Tile[,] grid;
@@ -24,6 +27,7 @@ public class MazeManager : MonoBehaviour
         pathfinder.grid = grid;
         GenerateGrid();
         solveButton.onClick.AddListener(SolveMaze);
+        greenPath = new SimpleList<Tile>();
     }
 
     //Recorre la grilla y crea un tilePrefab en cada posición
@@ -99,11 +103,12 @@ public class MazeManager : MonoBehaviour
             statusText.text = "Solución encontrada";
             foreach (var node in path)
             {
-                var tile = grid[node.pos.x, node.pos.y];
+                Tile tile = grid[node.pos.x, node.pos.y];
                 if (tile.type == TileType.Empty)
                 {
                     tile.SetColor(Color.green);
                     tile.type = TileType.Path;
+                    greenPath.Add(tile);
                 }
             }
             StartCoroutine(MoveCharacter(path));
@@ -117,13 +122,26 @@ public class MazeManager : MonoBehaviour
         return new Vector3(gridIndex.x + offsetX, gridIndex.y + offsetY, 0);
     }
 
+    public void ClearPath()
+    {
+        character.transform.position = originalCharaceterPos;
+        if (greenPath.Count > 0)
+        {
+            for (int i = 0; i < greenPath.Count; i++)
+            {
+                greenPath[i].SetColor(Color.white);
+            }
+            greenPath.Clear();
+        }
+    }
+
 
     //Mueve el personaje por cada nodo del camino con una pausa de 0.2 segundos
     IEnumerator MoveCharacter(List<Node> path)
     {
         foreach (var node in path)
         {
-            character.position = new Vector3(node.pos.x, node.pos.y, 0);
+            character.position = GridToWorld(node.pos);
             yield return new WaitForSeconds(0.2f);
         }
     }

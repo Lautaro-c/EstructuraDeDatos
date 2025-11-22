@@ -20,7 +20,7 @@ public class LeaderboardManager : MonoBehaviour
     void Start()
     {
         //Genera 100 entradas de puntaje aleatorias y las inserta en el árbol
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < 5; i++)
         {
             string name = "Player" + i;
             int score = Random.Range(0, 1000);
@@ -75,6 +75,7 @@ public class LeaderboardManager : MonoBehaviour
     public void LevelOrder()
     {
         SimpleList<Node<ScoreEntry>> nodes = scoreTree.LevelOrder();
+        //Hay que pasar de nodes a scores porque UpdateUI espera una lista de ScoreEntry
         SimpleList<ScoreEntry> scores = ConvertToList(nodes);
         UpdateUI(scores);
     }

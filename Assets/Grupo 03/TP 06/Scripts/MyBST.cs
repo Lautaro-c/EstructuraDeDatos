@@ -47,7 +47,7 @@ public class MyBST<T> where T : IComparable<T>
     }
     private int GetHeightRecursive(Node<T> current)
     {
-        //si el actual es nulo devulve menos 2 (se interpreta como que no tiene altuna) 
+        //si el actual es nulo devulve menos 1 (se interpreta como que no tiene altura) 
         if (current == null)
         {
             return -1;

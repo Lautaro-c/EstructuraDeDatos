@@ -7,11 +7,17 @@ public class MazeCreator : MonoBehaviour
     private TileType newTileType;
     private GameObject clickedObject;
     [SerializeField] private MazeManager mazeManager;
+    private GameObject lastEndTile;
+    private GameObject lastStartTile;
+    [SerializeField] private Pointer pointer;
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // 0 = clic izquierdo
+        if (Input.GetMouseButtonDown(0))
         {
-  
+            mazeManager.ClearPath();
+        }
+        if (Input.GetMouseButton(0)) // 0 = clic izquierdo
+        {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePos2D = new Vector2(mousePos.x, mousePos.y);
 
@@ -26,25 +32,24 @@ public class MazeCreator : MonoBehaviour
                 {
                     case "EndTile":
                         newTileType = TileType.End;
-                        Debug.Log("EndTile");
+                        pointer.ChangeBrushColor("Red");
                         break;
 
                     case "StartTile":
                         newTileType = TileType.Start;
-                        Debug.Log("StartTile");
+                        pointer.ChangeBrushColor("Blue");
                         break;
 
                     case "WallTile":
                         newTileType = TileType.Wall;
-                        Debug.Log("WallTile");
+                        pointer.ChangeBrushColor("Black");
                         break;
 
                     case "EmptyTile":
                         newTileType = TileType.Path;
-                        Debug.Log("PathTile");
+                        pointer.ChangeBrushColor("White");
                         break;
                     case "EditableTile":
-                        Debug.Log("EditableTile");
                         UpdateTile(clickedObject);
                         break;
                 }
@@ -54,11 +59,25 @@ public class MazeCreator : MonoBehaviour
 
     private void UpdateTile(GameObject tile)
     {
-        Debug.Log("I was called");
         if (tile.GetComponent<Tile>())
         {
-            Debug.Log("The if was passed");
             mazeManager.SetTileType(tile, newTileType);
+            if (newTileType  == TileType.End)
+            {
+                if(lastEndTile != null && lastEndTile != tile)
+                {
+                    mazeManager.SetTileType(lastEndTile, TileType.Path);
+                }
+                lastEndTile = tile;
+            }
+            if (newTileType == TileType.Start)
+            {
+                if (lastStartTile != null && lastStartTile != tile)
+                {
+                    mazeManager.SetTileType(lastStartTile, TileType.Path);
+                }
+                lastStartTile = tile;
+            }
         }
     }
 

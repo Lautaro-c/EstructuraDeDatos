@@ -92,10 +92,16 @@ public class SetUIController : MonoBehaviour
             newItem.GetComponent<Image>().sprite = item.Sprite;
 
             var nameText = newItem.transform.Find("NameText")?.GetComponent<TextMeshProUGUI>();
-            if (nameText != null) nameText.text = item.name;
+            if (nameText != null)
+            {
+                nameText.text = item.name;
+            }
 
             var priceText = newItem.transform.Find("PriceText")?.GetComponent<TextMeshProUGUI>();
-            if (priceText != null) priceText.text = "$" + item.Price;
+            if (priceText != null)
+            {
+                priceText.text = "$" + item.Price;
+            }
 
             GameObject instantiatedItem = Instantiate(newItem, this.transform);
             instantiatedItem.GetComponent<Button>().onClick.RemoveAllListeners();
