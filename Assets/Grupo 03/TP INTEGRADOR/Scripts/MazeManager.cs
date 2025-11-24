@@ -85,7 +85,7 @@ public class MazeManager : MonoBehaviour
 
     void SolveMaze()
     {
-        var path = pathfinder.FindPath(startPos, endPos);
+        List<Node> path = pathfinder.FindPath(startPos, endPos);
         Debug.Log("Startpos: " + startPos);
         Debug.Log("Endpos: " + endPos);
         if (path == null)
@@ -94,17 +94,16 @@ public class MazeManager : MonoBehaviour
         }
         else
         {
-            List<Node> fullPath = pathfinder.FindPath(startPos, endPos);
-            for (int i = 0; i < fullPath.Count; i++)
+            for (int i = 0; i < path.Count; i++)
             {
-                Debug.Log("PosX " + fullPath[i].pos.x);
-                Debug.Log("PosY " + fullPath[i].pos.y);
+                Debug.Log("PosX " + path[i].pos.x);
+                Debug.Log("PosY " + path[i].pos.y);
             }
             statusText.text = "Solución encontrada";
             foreach (var node in path)
             {
                 Tile tile = grid[node.pos.x, node.pos.y];
-                if (tile.type == TileType.Empty)
+                if (tile.type == TileType.Empty || tile.type == TileType.Path)
                 {
                     tile.SetColor(Color.green);
                     tile.type = TileType.Path;
