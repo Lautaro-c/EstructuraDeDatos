@@ -14,7 +14,7 @@ public class Pointer : MonoBehaviour
 
     void Start()
     {
-        Cursor.SetCursor(WhiteCursorTexture, hotSpot, cursorMode);
+        CursorManager.Instance.SetCustomCursor(WhiteCursorTexture, hotSpot, cursorMode);
     }
     public void ChangeBrushColor(string color)
     {

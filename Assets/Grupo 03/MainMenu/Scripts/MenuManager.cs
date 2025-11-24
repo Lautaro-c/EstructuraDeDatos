@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    private void Start()
+    private void Awake()
     {
+       CursorManager.Instance.SetDefaultCursor();
     }
     public void SelectLevel(string nombre)
     {
