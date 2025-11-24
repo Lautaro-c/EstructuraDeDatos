@@ -7,14 +7,15 @@ using System.Runtime.CompilerServices;
 
 public class MazeManager : MonoBehaviour
 {
-    public GameObject tilePrefab; //Prefab para las celdas del laberinto
-    private int width = 10, height = 10; //Dimensiones del laberinto
-    public Pathfinder pathfinder; //Referencia al componente Pathfinder
-    public Transform character; //Referencia al personaje que se moverá por el laberinto
-    public TextMeshProUGUI statusText; //Texto para mostrar el estado de la solución
-    public Button solveButton; //Botón para iniciar la solución del laberinto
+    public GameObject tilePrefab;           //Prefab para las celdas del laberinto
+    private int width = 10, height = 10;    //Dimensiones del laberinto
+    public Pathfinder pathfinder;           //Referencia al componente Pathfinder
+    public Transform character;             //Referencia al personaje que se moverá por el laberinto
+    public TextMeshProUGUI statusText;      //Texto para mostrar el estado de la solución
+    public Button solveButton;              //Botón para iniciar la solución del laberinto
     private SimpleList<Tile> greenPath;
-    private Vector3 originalCharaceterPos = new Vector3(-7.28f, -3.28f, 0);
+    private Vector3 originalCharaceterPos = new Vector3(-7.46f, -3.35f, 0);
+    [SerializeField] private Animator anim;
 
     //Matriz que representa el laberinto
     private Tile[,] grid;
@@ -63,17 +64,17 @@ public class MazeManager : MonoBehaviour
         switch (type)
         {
             case TileType.Path: 
-                tile.UpdateColorByTipe(); 
+                tile.UpdateColorByType(); 
                 break;
             case TileType.Wall:
-                tile.UpdateColorByTipe();
+                tile.UpdateColorByType();
                 break;
             case TileType.Start:
-                tile.UpdateColorByTipe();
+                tile.UpdateColorByType();
                 startPos = tile.gridIndex; 
                 break;
             case TileType.End:
-                tile.UpdateColorByTipe();
+                tile.UpdateColorByType();
                 endPos = tile.gridIndex;
                 break;
         }
@@ -110,6 +111,8 @@ public class MazeManager : MonoBehaviour
                     greenPath.Add(tile);
                 }
             }
+            //Agregar acá el booleano de la maze
+            anim.SetBool("isPathFinding", true);
             StartCoroutine(MoveCharacter(path));
         }
     }
@@ -142,6 +145,8 @@ public class MazeManager : MonoBehaviour
         {
             character.position = GridToWorld(node.pos);
             yield return new WaitForSeconds(0.2f);
+                
         }
+        anim.SetBool("isPathFinding", false);
     }
 }

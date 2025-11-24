@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    private void Start()
+    {
+    }
     public void SelectLevel(string nombre)
     {
         SceneManager.LoadScene(nombre);

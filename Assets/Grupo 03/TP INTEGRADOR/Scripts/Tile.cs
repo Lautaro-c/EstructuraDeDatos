@@ -9,7 +9,7 @@ public class Tile : MonoBehaviour
     public TileType type;
     public int cost = 1;
 
-    public void UpdateColorByTipe()
+    public void UpdateColorByType()
     {
         switch (type)
         {
