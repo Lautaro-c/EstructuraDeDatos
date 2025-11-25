@@ -20,6 +20,7 @@ public class MazeManager : MonoBehaviour
     //Matriz que representa el laberinto
     private Tile[,] grid;
     private Vector2Int startPos, endPos; //Posiciones de inicio y fin
+    private bool mazeIsBeingSolved = false;
 
     //  Crea la grilla, la asigna al Pathfinder, genera los tiles y conecta el botón a SolveMaze()
     void Start()
@@ -86,34 +87,39 @@ public class MazeManager : MonoBehaviour
 
     void SolveMaze()
     {
-        List<Node> path = pathfinder.FindPath(startPos, endPos);
-        Debug.Log("Startpos: " + startPos);
-        Debug.Log("Endpos: " + endPos);
-        if (path == null)
+        if (!mazeIsBeingSolved)
         {
-            statusText.text = "Sin solución";
-        }
-        else
-        {
-            for (int i = 0; i < path.Count; i++)
+            Debug.Log("Se esta resolviendo el puzzle");
+            mazeIsBeingSolved = true;
+            List<Node> path = pathfinder.FindPath(startPos, endPos);
+            Debug.Log("Startpos: " + startPos);
+            Debug.Log("Endpos: " + endPos);
+            if (path == null)
             {
-                Debug.Log("PosX " + path[i].pos.x);
-                Debug.Log("PosY " + path[i].pos.y);
+                statusText.text = "Sin solución";
             }
-            statusText.text = "Solución encontrada";
-            foreach (var node in path)
+            else
             {
-                Tile tile = grid[node.pos.x, node.pos.y];
-                if (tile.type == TileType.Empty || tile.type == TileType.Path)
+                for (int i = 0; i < path.Count; i++)
                 {
-                    tile.SetColor(Color.green);
-                    tile.type = TileType.Path;
-                    greenPath.Add(tile);
+                    Debug.Log("PosX " + path[i].pos.x);
+                    Debug.Log("PosY " + path[i].pos.y);
                 }
+                statusText.text = "Solución encontrada";
+                foreach (var node in path)
+                {
+                    Tile tile = grid[node.pos.x, node.pos.y];
+                    if (tile.type == TileType.Empty || tile.type == TileType.Path)
+                    {
+                        tile.SetColor(Color.green);
+                        tile.type = TileType.Path;
+                        greenPath.Add(tile);
+                    }
+                }
+                //Agregar acá el booleano de la maze
+                anim.SetBool("isPathFinding", true);
+                StartCoroutine(MoveCharacter(path));
             }
-            //Agregar acá el booleano de la maze
-            anim.SetBool("isPathFinding", true);
-            StartCoroutine(MoveCharacter(path));
         }
     }
 
@@ -126,14 +132,17 @@ public class MazeManager : MonoBehaviour
 
     public void ClearPath()
     {
-        character.transform.position = originalCharaceterPos;
-        if (greenPath.Count > 0)
+        if (!mazeIsBeingSolved)
         {
-            for (int i = 0; i < greenPath.Count; i++)
+            character.transform.position = originalCharaceterPos;
+            if (greenPath.Count > 0)
             {
-                greenPath[i].SetColor(Color.white);
+                for (int i = 0; i < greenPath.Count; i++)
+                {
+                    greenPath[i].SetColor(Color.white);
+                }
+                greenPath.Clear();
             }
-            greenPath.Clear();
         }
     }
 
@@ -148,5 +157,7 @@ public class MazeManager : MonoBehaviour
                 
         }
         anim.SetBool("isPathFinding", false);
+        mazeIsBeingSolved = false;
+        Debug.Log("Se termino de resolver el puzzle");
     }
 }

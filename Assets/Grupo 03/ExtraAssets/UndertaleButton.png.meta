@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      UndertaleButton_0: -5804212930255653840
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

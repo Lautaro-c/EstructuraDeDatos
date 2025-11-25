@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      MercyButton_0: 5546449007851982983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
