@@ -16,16 +16,20 @@ public class MyLinkedListManager : MonoBehaviour
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
+    [SerializeField] private Transform listContent;
+    [SerializeField] private GameObject listItemPrefab;
+
     private void Start()
     {
         linkedList = new MyLinkedList<int>();
+        UpdateAllUI();
     }
 
     private void Update()
     {
         countText.text = "Count: " + linkedList.Count.ToString();
         emptyText.text = "IsEmpty: " + linkedList.IsEmpty();
-        UpdateListText();
+        //UpdateListText();
     }
 
     public void AddNumber()
@@ -34,6 +38,7 @@ public class MyLinkedListManager : MonoBehaviour
         {
             linkedList.Add((int)result); // Explicitly cast to resolve ambiguity  
             Debug.Log("Número ingresado: " + result);
+            UpdateAllUI();
         }
         else
         {
@@ -54,6 +59,7 @@ public class MyLinkedListManager : MonoBehaviour
             }
         }
         linkedList.AddRange(partsNumbers);
+        UpdateAllUI();
     }
 
     public void UpdateListText()
@@ -68,10 +74,32 @@ public class MyLinkedListManager : MonoBehaviour
             listText.text = "The full list is: ";
         }
     }
+    public void UpdateListVisual()
+    {
+        foreach (Transform child in listContent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < linkedList.Count; i++)
+        {
+            GameObject item = Instantiate(listItemPrefab, listContent);
+            item.transform.localScale = Vector3.one;
+
+            item.GetComponent<ListItemUI>().Setup(i, linkedList[i]);
+        }
+    }
+    private void UpdateAllUI()
+    {
+        countText.text = "Count: " + linkedList.Count.ToString();
+        UpdateListText();
+        UpdateListVisual();
+    }
 
     public void ClearNumbers()
     {
         linkedList.Clear();
+        UpdateAllUI();
     }
 
     public void RemoveNumber()
@@ -82,6 +110,7 @@ public class MyLinkedListManager : MonoBehaviour
             {
                 Debug.Log("Número borrado: " + result);
                 tickSign.SetActive(true);
+                UpdateAllUI();
             }
             else
             {
@@ -108,6 +137,7 @@ public class MyLinkedListManager : MonoBehaviour
             {
                 Debug.Log("Número borrado: " + index);
                 tickSign.SetActive(true);
+                UpdateAllUI();
             }
             else
             {
