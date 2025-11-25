@@ -18,22 +18,29 @@ public class ListManager : MonoBehaviour
     [SerializeField] private GameObject tickSign;
     [SerializeField] private GameObject crossSing;
 
+    [SerializeField] private Transform listContent;
+    [SerializeField] private GameObject listItemPrefab;
+
     private void Start()
     {
         list = new SimpleList<int>();
+        UpdateAllUI();
     }
 
     private void Update()
     {
         countText.text = "Count: " + list.Count.ToString();
         UpdateListText();
+
     }
 
     public void AddNumber()
     {
         if (int.TryParse(generalInputField.text, out int result))
         {
-            list.Add(result);    
+            list.Add(result);
+            UpdateAllUI();
+            generalInputField.text = "";
         }
         else
         {
@@ -54,6 +61,7 @@ public class ListManager : MonoBehaviour
             }
         }
         list.AddRange(partsNumbers);
+        UpdateAllUI();
     }
 
     public void UpdateListText()
@@ -70,7 +78,8 @@ public class ListManager : MonoBehaviour
 
     public void ClearNumbers()
     { 
-        list.Clear(); 
+        list.Clear();
+        UpdateAllUI();
     }
 
     public void RemoveNumber()
@@ -81,7 +90,9 @@ public class ListManager : MonoBehaviour
             {
                 Debug.Log("Número borrado: " + result);
                 tickSign.SetActive(true);
-            }else
+                UpdateAllUI();
+            }
+            else
             { 
                 crossSing.SetActive(true); 
             }
@@ -115,6 +126,7 @@ public class ListManager : MonoBehaviour
             if (list.Count - 1 >= result)
             {
                 list[result] = result2;
+                UpdateAllUI();
             }
         }
         else
@@ -127,4 +139,27 @@ public class ListManager : MonoBehaviour
         tickSign.SetActive(false);
         crossSing.SetActive(false); 
     }
+    public void UpdateListVisual()
+    {
+        foreach (Transform child in listContent)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            GameObject item = Instantiate(listItemPrefab, listContent);
+            item.transform.localScale = Vector3.one;
+
+            item.GetComponent<ListItemUI>().Setup(i, list[i]);
+        }
+    }
+    private void UpdateAllUI()
+    {
+        countText.text = "Count: " + list.Count.ToString();
+        UpdateListText();
+        UpdateListVisual();
+    }
+
+
 }
