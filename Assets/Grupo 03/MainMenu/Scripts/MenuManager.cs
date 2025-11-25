@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
        CursorManager.Instance.SetDefaultCursor();
     }
