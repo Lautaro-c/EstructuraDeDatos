@@ -19,7 +19,8 @@ public class MazeManager : MonoBehaviour
 
     //Matriz que representa el laberinto
     private Tile[,] grid;
-    private Vector2Int startPos, endPos; //Posiciones de inicio y fin
+    private Vector2Int startPos = new Vector2Int(1000, 1000);
+    private Vector2Int endPos = new Vector2Int(1000, 1000); //Posiciones de inicio y fin
     private bool mazeIsBeingSolved = false;
 
     //  Crea la grilla, la asigna al Pathfinder, genera los tiles y conecta el botón a SolveMaze()
@@ -65,10 +66,30 @@ public class MazeManager : MonoBehaviour
         switch (type)
         {
             case TileType.Path: 
-                tile.UpdateColorByType(); 
+                tile.UpdateColorByType();
+                if (tile.gridIndex == endPos)
+                {
+                    Debug.Log("Se sobrescrivio la salida");
+                    endPos = new Vector2Int(1000, 1000);
+                }
+                if (tile.gridIndex == startPos)
+                {
+                    Debug.Log("Se sobrescrivio la entrada");
+                    startPos = new Vector2Int(1000, 1000);
+                }
                 break;
             case TileType.Wall:
                 tile.UpdateColorByType();
+                if (tile.gridIndex == endPos)
+                {
+                    Debug.Log("Se sobrescrivio la salida");
+                    endPos = new Vector2Int(1000, 1000);
+                }
+                if (tile.gridIndex == startPos)
+                {
+                    Debug.Log("Se sobrescrivio la entrada");
+                    startPos = new Vector2Int(1000, 1000);
+                }
                 break;
             case TileType.Start:
                 tile.UpdateColorByType();
@@ -87,6 +108,12 @@ public class MazeManager : MonoBehaviour
 
     void SolveMaze()
     {
+        if(startPos == new Vector2Int(1000, 1000) || endPos == new Vector2Int(1000, 1000))
+        {
+            statusText.text = "Sin solución";
+            mazeIsBeingSolved = false;
+            return;
+        }
         if (!mazeIsBeingSolved)
         {
             Debug.Log("Se esta resolviendo el puzzle");
