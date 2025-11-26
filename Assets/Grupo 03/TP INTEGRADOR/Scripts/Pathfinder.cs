@@ -87,7 +87,10 @@ public class Pathfinder : MonoBehaviour
     // Verifica si una posición es válida dentro del grid y no es una pared.
     private bool IsValid(Vector2Int pos)
     {
-        if (pos.x < 0 || pos.y < 0 || pos.x >= grid.GetLength(0) || pos.y >= grid.GetLength(1)) return false;
+        if (pos.x < 0 || pos.y < 0 || pos.x >= grid.GetLength(0) || pos.y >= grid.GetLength(1))
+        {
+            return false;
+        }
         return grid[pos.x, pos.y].type != TileType.Wall;
     }
 }

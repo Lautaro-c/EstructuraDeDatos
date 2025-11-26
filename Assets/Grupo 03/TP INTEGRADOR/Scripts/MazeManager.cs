@@ -97,6 +97,7 @@ public class MazeManager : MonoBehaviour
             if (path == null)
             {
                 statusText.text = "Sin solución";
+                mazeIsBeingSolved = false;
             }
             else
             {
