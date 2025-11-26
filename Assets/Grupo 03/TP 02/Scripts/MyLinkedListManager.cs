@@ -28,7 +28,7 @@ public class MyLinkedListManager : MonoBehaviour
     private void Update()
     {
         countText.text = "Count: " + linkedList.Count.ToString();
-        emptyText.text = "IsEmpty: " + linkedList.IsEmpty();
+        emptyText.text = "Is-Empty?: " + linkedList.IsEmpty();
         //UpdateListText();
     }
 
@@ -91,6 +91,7 @@ public class MyLinkedListManager : MonoBehaviour
     }
     private void UpdateAllUI()
     {
+        Debug.Log("Updateado pete");
         countText.text = "Count: " + linkedList.Count.ToString();
         UpdateListText();
         UpdateListVisual();
